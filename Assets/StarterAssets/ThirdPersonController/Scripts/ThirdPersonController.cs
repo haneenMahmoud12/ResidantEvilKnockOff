@@ -159,6 +159,20 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            ThrowGrenade();
+        }
+
+        private void ThrowGrenade()
+        {
+            if (_input.isThrowing)
+            {
+                _animator.SetBool("isThrowing", true);
+
+            }
+            else
+            {
+                _animator.SetBool("isThrowing", false);
+            }
         }
 
         private void LateUpdate()
