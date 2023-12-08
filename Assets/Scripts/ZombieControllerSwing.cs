@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieContoller : MonoBehaviour
+public class ZombieContollerSwing : MonoBehaviour
 {
     private NavMeshAgent agent = null;
     private Animator anim = null;
     private float timeOfLastAttack = 0;
     private EnemyStats stats = null;
-    private bool isStopped =false;
+    private bool isStopped = false;
     private bool playerNear = false;
     [SerializeField] Transform target;
-    
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -65,7 +65,7 @@ public class ZombieContoller : MonoBehaviour
         }
         else if (gameObject.CompareTag("VisitRoomZombie"))
         {
-            if ((target.position.x < 23) || (target.position.x > 31) || (target.position.z > 14) || (target.position.z < 8))
+            if ((target.position.x < 7) || (target.position.x > 15) || (target.position.z > -7) || (target.position.z < -13))
             {
                 playerNear = false;
                 anim.SetBool("playerNear", false);
@@ -113,7 +113,7 @@ public class ZombieContoller : MonoBehaviour
 
     private void RotateToTarget()
     {
-       // transform.LookAt(target);
+        // transform.LookAt(target);
         Vector3 direction = target.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = rotation;
@@ -121,7 +121,7 @@ public class ZombieContoller : MonoBehaviour
 
     private void AttackTarget(PlayerStats playerStats)
     {
-        if(!playerStats.isDead)
+        if (!playerStats.isDead)
         {
             anim.SetTrigger("Attack");
             stats.DealDamage(playerStats);
