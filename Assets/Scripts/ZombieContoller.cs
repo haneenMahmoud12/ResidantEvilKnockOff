@@ -52,7 +52,7 @@ public class ZombieContoller : MonoBehaviour
         }
         else if (gameObject.CompareTag("OfficeZombie"))
         {
-            if ((target.position.x < 0.5) || (target.position.x > 8) || (target.position.z > 13.5) || (target.position.z < 8.3))
+            if ((target.position.x < -16) || (target.position.x > -7) || (target.position.z > -7) || (target.position.z < -13))
             {
                 playerNear = false;
                 anim.SetBool("playerNear", false);
@@ -65,7 +65,7 @@ public class ZombieContoller : MonoBehaviour
         }
         else if (gameObject.CompareTag("VisitRoomZombie"))
         {
-            if ((target.position.x < 23) || (target.position.x > 31) || (target.position.z > 14) || (target.position.z < 8))
+            if ((target.position.x < 7) || (target.position.x > 15) || (target.position.z > -7) || (target.position.z < -13))
             {
                 playerNear = false;
                 anim.SetBool("playerNear", false);
@@ -75,6 +75,12 @@ public class ZombieContoller : MonoBehaviour
             {
                 playerNear = true;
             }
+        }
+
+        if (stats.isDead)
+        {
+            anim.SetTrigger("die");
+            // Destroy(gameObject, 5);
         }
 
     }

@@ -4,10 +4,29 @@ using UnityEngine;
 
 public class Move : MonoBehaviour {
 
-    [Range(0,5)]
-    public float speed = 1;
+    [SerializeField]
+    GameObject zombie;
 
-    private void FixedUpdate() {
-        transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speed, 0, Input.GetAxis("Vertical") * Time.deltaTime * speed);
+    private PlayerStats stats = null;
+
+    private void Start()
+    {
+        stats = GetComponent<PlayerStats>();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EnemyStats enemyStats = zombie.GetComponent<EnemyStats>();
+            AttackTarget(enemyStats);
+        }
+    }
+
+    private void AttackTarget(EnemyStats enemyStats)
+    {
+        if (!enemyStats.isDead)
+        {
+            stats.DealDamage(enemyStats);
+        }
     }
 }
