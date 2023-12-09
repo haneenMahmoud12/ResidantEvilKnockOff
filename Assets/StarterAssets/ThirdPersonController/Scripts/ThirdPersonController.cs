@@ -159,10 +159,10 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            ThrowGrenade();
+            //ThrowGrenade();
         }
 
-        private void ThrowGrenade()
+        /*private void ThrowGrenade()
         {
             if (_input.isThrowing)
             {
@@ -174,7 +174,7 @@ namespace StarterAssets
                 _animator.SetBool("isThrowing", false);
             }
         }
-
+        */
         private void LateUpdate()
         {
             CameraRotation();

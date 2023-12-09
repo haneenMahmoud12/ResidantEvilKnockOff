@@ -42,6 +42,7 @@ public class grenade : MonoBehaviour
         {
             GameObject explosionEffect = Instantiate(explosionEffectPrefab, transform.position + explosionParticleOffset, Quaternion.identity);
 
+            NearbyForceApply();
             Destroy(explosionEffect, 4f);
             Destroy(gameObject);
 

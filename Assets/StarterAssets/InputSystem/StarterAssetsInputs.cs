@@ -44,11 +44,11 @@ namespace StarterAssets
 			SprintInput(value.isPressed);
 		}
 
-		public void OnIsThrowing(InputValue value)
+		/*public void OnIsThrowing(InputValue value)
 		{
 			isThrowing = value.isPressed;
 			
-		}
+		}*/
 #endif
 
 
