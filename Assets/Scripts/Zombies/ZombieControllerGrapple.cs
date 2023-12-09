@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieContollerPetroling : MonoBehaviour
+public class ZombieContollerGrapple : MonoBehaviour
 {
     private NavMeshAgent agent = null;
     private Animator anim = null;
@@ -12,8 +12,6 @@ public class ZombieContollerPetroling : MonoBehaviour
     private bool isStopped = false;
     private bool playerNear = false;
     [SerializeField] Transform target;
-    [SerializeField] GameObject[] waypoints;
-    int i=0;
 
     void Start()
     {
@@ -54,7 +52,7 @@ public class ZombieContollerPetroling : MonoBehaviour
         }
         else if (gameObject.CompareTag("OfficeZombie"))
         {
-            if ((target.position.x <-16) || (target.position.x > -7) || (target.position.z > -7) || (target.position.z < -13))
+            if ((target.position.x < -16) || (target.position.x > -7) || (target.position.z > -7) || (target.position.z < -13))
             {
                 playerNear = false;
                 anim.SetBool("playerNear", false);
@@ -82,16 +80,7 @@ public class ZombieContollerPetroling : MonoBehaviour
         if (stats.isDead)
         {
             anim.SetTrigger("die");
-           // Destroy(gameObject, 5);
-        }
-
-        if (!playerNear)
-        {
-            if (agent.remainingDistance < 1f)
-            {
-                i = (i + 1) % waypoints.Length;
-                agent.SetDestination(waypoints[i].transform.position);
-            }
+            Destroy(gameObject, 5);
         }
 
     }
