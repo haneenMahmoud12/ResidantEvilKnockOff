@@ -3,7 +3,12 @@ guid: 144b188b8f590184ebee0a878609c066
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KSR29sniperrifle
+    second: {fileID: 2100000, guid: f2a32dd405207ec4aab0c64765e15c02, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

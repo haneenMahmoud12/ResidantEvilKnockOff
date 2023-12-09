@@ -3,7 +3,22 @@ guid: 32ba4113b7f42604ebfb5f539416e9f6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _23_bullet_CapsuleMat
+    second: {fileID: 2100000, guid: c0c37521abe5a3042b761fe5c4404ddb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _23_shell_CylinderMat
+    second: {fileID: 2100000, guid: ecb58fc54d4674a40bd9ea72269ad6d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _23_shell_SphereMat
+    second: {fileID: 2100000, guid: c2db88b5cdf04c74698f9253cd9281b2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
