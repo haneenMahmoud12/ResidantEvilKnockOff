@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class NewBehaviourScript : MonoBehaviour
 {
     public Card card;
-    public Text cardName;
-    public Text quantity;
+    public TMP_Text cardName;
+    public TMP_Text quantity;
     public Image image;
     public Button use;
     public Button equip;
@@ -18,15 +19,23 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
         
+     if(card != null)
+        {
+            Initialize();
+        }
+      
+        
+    }
+
+    private void Initialize()
+    {
         cardName.text = card.cardName;
         quantity.text = card.quantity.ToString();
+        Color newColor = new Color(1, 1, 1, 0);
+        image.color = newColor;
         image.sprite = card.image;
-        use = card.Use;
-        equip = card.Equip;
-        discard = card.Discard;
-        combine = card.Combine;
 
-        
+
     }
 
     // Update is called once per frame
