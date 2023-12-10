@@ -156,7 +156,7 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
+           // JumpAndGravity();
             GroundedCheck();
             Move();
         }
@@ -170,7 +170,7 @@ namespace StarterAssets
         {
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
-            _animIDJump = Animator.StringToHash("Jump");
+           // _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
@@ -279,7 +279,7 @@ namespace StarterAssets
             }
         }
 
-        private void JumpAndGravity()
+      /*  private void JumpAndGravity()
         {
             if (Grounded)
             {
@@ -346,7 +346,7 @@ namespace StarterAssets
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
-        }
+        }*/
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
@@ -387,6 +387,25 @@ namespace StarterAssets
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+           
+            if (other.CompareTag("Item") )
+            {
+                //&& Input.GetKeyUp(KeyCode.E)
+                // Set the "Pick" trigger parameter to true
+                _animator.SetBool("Pick",true);
+
+                // Optionally, you can disable the item object or perform other actions
+                //StartCoroutine(DelayedAction());
+                Invoke("DelayedAction", 500.0f);
+                other.gameObject.SetActive(false);
+            }
+        }
+        private void DelayedAction()
+        {
+            
         }
     }
 }
