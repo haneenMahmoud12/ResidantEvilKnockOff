@@ -84,7 +84,7 @@ public class ZombieContollerSwing : MonoBehaviour
             {
                 anim.SetTrigger("die");
                 stats.killZombie = false;
-                Destroy(gameObject, 5);
+                //Destroy(gameObject, 5);
             }
         }
 

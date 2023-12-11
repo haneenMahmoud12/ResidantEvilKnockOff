@@ -88,7 +88,7 @@ public class ZombieThrow : MonoBehaviour
             {
                 anim.SetTrigger("die");
                 stats.killZombie = false;
-                Destroy(gameObject, 5);
+               // Destroy(gameObject, 5);
             }
         }
 
@@ -96,39 +96,11 @@ public class ZombieThrow : MonoBehaviour
 
     private void MoveToTarget()
     {
-        //agent.SetDestination(target.position);
         PlayerStats playerStats = target.GetComponent<PlayerStats>();
-      //  if (playerStats.health == playerStats.maxHealth) { }
         RotateToTarget();
         anim.SetBool("playerNear", true);
         if(!isStopped)
             AttackTarget(playerStats);
-        /*anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
-        //RotateToTarget();
-        float distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (distanceToTarget <= agent.stoppingDistance)
-        {
-            anim.SetFloat("Speed", 0f, 0.0f, Time.deltaTime);
-            if (!isStopped)
-            {
-                isStopped = true;
-                timeOfLastAttack = Time.time;
-            }
-            //Attack
-            if (Time.time >= timeOfLastAttack + stats.attackSpeed)
-            {
-                timeOfLastAttack = Time.time;
-                PlayerStats playerStats = target.GetComponent<PlayerStats>();
-                AttackTarget(playerStats);
-            }
-        }
-        else
-        {
-            if (isStopped)
-            {
-                isStopped = false;
-            }
-        }*/
     }
 
     private void RotateToTarget()

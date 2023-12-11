@@ -883,6 +883,9 @@ MonoBehaviour:
   attackSpeed: 0
   canAttack: 0
   killZombie: 0
+  Coins: {fileID: 2104402493}
+  Transform: {fileID: 196405664}
+  goldAmount: 0
 --- !u!195 &196405668
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1359,6 +1362,9 @@ MonoBehaviour:
   attackSpeed: 0
   canAttack: 0
   killZombie: 0
+  Coins: {fileID: 2104402493}
+  Transform: {fileID: 250061032}
+  goldAmount: 0
 --- !u!114 &250061034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2806,7 +2812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4aa79f272b44a6641a2857be35c7629a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4aa79f272b44a6641a2857be35c7629a, type: 3}
       propertyPath: m_TagString
@@ -3650,6 +3656,9 @@ MonoBehaviour:
   attackSpeed: 0
   canAttack: 0
   killZombie: 0
+  Coins: {fileID: 2104402493}
+  Transform: {fileID: 634406990}
+  goldAmount: 0
 --- !u!54 &634406987
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4023,39 +4032,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6887460861317989783, guid: c6105c6596801174b907d5094d90d00b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.1
+      value: 7.8
       objectReference: {fileID: 0}
     - target: {fileID: 6887460861317989783, guid: c6105c6596801174b907d5094d90d00b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.02
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6887460861317989783, guid: c6105c6596801174b907d5094d90d00b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.42
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 6887460861317989783, guid: c6105c6596801174b907d5094d90d00b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9404523
+      value: 0.96722347
       objectReference: {fileID: 0}
     - target: {fileID: 6887460861317989783, guid: c6105c6596801174b907d5094d90d00b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.14676644
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6887460861317989783, guid: c6105c6596801174b907d5094d90d00b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.3029423
+      value: 0.25392672
       objectReference: {fileID: 0}
     - target: {fileID: 6887460861317989783, guid: c6105c6596801174b907d5094d90d00b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.047277004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6887460861317989783, guid: c6105c6596801174b907d5094d90d00b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 17.74
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6887460861317989783, guid: c6105c6596801174b907d5094d90d00b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 35.71
+      value: 29.42
       objectReference: {fileID: 0}
     - target: {fileID: 6887460861317989783, guid: c6105c6596801174b907d5094d90d00b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -4587,6 +4596,9 @@ MonoBehaviour:
   attackSpeed: 0
   canAttack: 0
   killZombie: 0
+  Coins: {fileID: 2104402493}
+  Transform: {fileID: 864775607}
+  goldAmount: 0
 --- !u!195 &864775611
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5335,6 +5347,9 @@ MonoBehaviour:
   attackSpeed: 0
   canAttack: 0
   killZombie: 0
+  Coins: {fileID: 2104402493}
+  Transform: {fileID: 1017435456}
+  goldAmount: 0
 --- !u!195 &1017435460
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5856,7 +5871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_TagString
@@ -6527,6 +6542,9 @@ MonoBehaviour:
   attackSpeed: 0
   canAttack: 0
   killZombie: 0
+  Coins: {fileID: 2104402493}
+  Transform: {fileID: 1264369390}
+  goldAmount: 0
 --- !u!54 &1264369394
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7228,15 +7246,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.4927271
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.8701839
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_LocalRotation.z
@@ -7248,7 +7266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 239.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -7260,7 +7278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_TagString
@@ -7384,6 +7402,9 @@ MonoBehaviour:
   attackSpeed: 0
   canAttack: 0
   killZombie: 0
+  Coins: {fileID: 2104402493}
+  Transform: {fileID: 1519390430}
+  goldAmount: 0
 --- !u!136 &1519390439
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7625,7 +7646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b3b643a2e44bb144b915fa36e002b5d0, type: 3}
       propertyPath: m_TagString
@@ -7769,6 +7790,9 @@ MonoBehaviour:
   attackSpeed: 0
   canAttack: 0
   killZombie: 0
+  Coins: {fileID: 2104402493}
+  Transform: {fileID: 1556669596}
+  goldAmount: 0
 --- !u!208 &1558321519
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -7922,6 +7946,79 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.50100005, z: 0.048}
   m_TimeToStationary: 0.5
+--- !u!1001 &1623002169
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_Name
+      value: Coins
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 26.78367
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -22.583805
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
 --- !u!1001 &1646795292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8675,6 +8772,9 @@ MonoBehaviour:
   attackSpeed: 0
   canAttack: 0
   killZombie: 0
+  Coins: {fileID: 2104402493}
+  Transform: {fileID: 1788321529}
+  goldAmount: 0
 --- !u!195 &1788321533
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -8992,6 +9092,9 @@ MonoBehaviour:
   attackSpeed: 0
   canAttack: 0
   killZombie: 0
+  Coins: {fileID: 2104402493}
+  Transform: {fileID: 1848402023}
+  goldAmount: 0
 --- !u!195 &1848402020
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -10027,7 +10130,7 @@ Transform:
   m_GameObject: {fileID: 2034888458}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.58, y: 0.67, z: -29}
+  m_LocalPosition: {x: 6.31, y: 0.67, z: -8.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10065,7 +10168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5723c77326e8395449552b5acf9b9961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombie: {fileID: 1017435455}
+  zombie: {fileID: 1519390431}
 --- !u!1 &2037434737
 GameObject:
   m_ObjectHideFlags: 0
@@ -10321,6 +10424,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2104402493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
+  m_PrefabInstance: {fileID: 1623002169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2106603241 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8604416326238269954, guid: beef3bcde1610f04aa96275436147bb9, type: 3}
@@ -13429,3 +13537,4 @@ SceneRoots:
   - {fileID: 2104197791}
   - {fileID: 654145025}
   - {fileID: 1162150083}
+  - {fileID: 1623002169}

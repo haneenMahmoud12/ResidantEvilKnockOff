@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime;
+using System;
 
 public class EnemyStats : CharacterStats
 {
@@ -8,6 +10,9 @@ public class EnemyStats : CharacterStats
     [SerializeField] public float attackSpeed;
     [SerializeField] public bool canAttack;
     public bool killZombie;
+    public GameObject Coins;
+    public Transform Transform;
+    public int goldAmount=0;
     void Start()
     {
         InitVariables();
@@ -30,6 +35,16 @@ public class EnemyStats : CharacterStats
     {
         killZombie = true;
         base.Die();
+        Destroy(gameObject,5);
+        DropCoins();
+        var rnd = new System.Random();
+        goldAmount = rnd.Next(5, 50);
+    }
+    private void DropCoins()
+    {
+        Vector3 position = transform.position;
+        GameObject coin = Instantiate(Coins, position, Quaternion.identity);
+        coin.SetActive(true);
     }
     public override void InitVariables() 
     {
