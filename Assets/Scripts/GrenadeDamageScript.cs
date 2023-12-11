@@ -5,7 +5,8 @@ using UnityEngine;
 public class GrenadeDamageScript : MonoBehaviour
 {
     public Animator anim;
-    public float objectHealth = 120f;
+    public float objectHealth = 5f;
+    public bool isEnemyKnockedDown = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,9 +39,10 @@ public class GrenadeDamageScript : MonoBehaviour
 
     IEnumerator KnockingDownAnim()
     {
-       
+        isEnemyKnockedDown = true;
         anim.SetBool("isKnockedDown", true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
+        isEnemyKnockedDown = false;
         anim.SetBool("isKnockedDown", false);
         
 
