@@ -18,6 +18,7 @@ public class ZombieContollerSwing : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         stats = GetComponent<EnemyStats>();
+        stats.damage = 2;
     }
     void Update()
     {
@@ -79,8 +80,12 @@ public class ZombieContollerSwing : MonoBehaviour
 
         if (stats.isDead)
         {
-            anim.SetTrigger("die");
-            Destroy(gameObject,5);
+            if (stats.killZombie)
+            {
+                anim.SetTrigger("die");
+                stats.killZombie = false;
+                Destroy(gameObject, 5);
+            }
         }
 
     }
@@ -130,7 +135,9 @@ public class ZombieContollerSwing : MonoBehaviour
         if (!playerStats.isDead)
         {
             anim.SetTrigger("Attack");
-            stats.DealDamage(playerStats);
+            stats.damage = 2;
+            if (!playerStats.isGrappled)
+                stats.DealDamage(playerStats);
         }
     }
 }

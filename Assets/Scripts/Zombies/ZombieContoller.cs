@@ -18,6 +18,7 @@ public class ZombieContoller : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         stats = GetComponent<EnemyStats>();
+        stats.damage = 1;
     }
     void Update()
     {
@@ -79,8 +80,12 @@ public class ZombieContoller : MonoBehaviour
 
         if (stats.isDead)
         {
-            anim.SetTrigger("die");
-            // Destroy(gameObject, 5);
+            if(stats.killZombie)
+            {
+                anim.SetTrigger("die");
+                stats.killZombie = false;
+                Destroy(gameObject, 5);
+            }
         }
 
     }
@@ -90,7 +95,7 @@ public class ZombieContoller : MonoBehaviour
         agent.SetDestination(target.position);
         anim.SetBool("playerNear", true);
         anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
-        //RotateToTarget();
+        RotateToTarget();
         float distanceToTarget = Vector3.Distance(target.position, transform.position);
         if (distanceToTarget <= agent.stoppingDistance)
         {
@@ -130,7 +135,8 @@ public class ZombieContoller : MonoBehaviour
         if(!playerStats.isDead)
         {
             anim.SetTrigger("Attack");
-            stats.DealDamage(playerStats);
+            if (!playerStats.isGrappled)
+                stats.DealDamage(playerStats);
         }
     }
 }

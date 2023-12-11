@@ -7,6 +7,7 @@ public class PlayerStats : CharacterStats
     [SerializeField] private int damage;
     [SerializeField] private float attackSpeed;
     [SerializeField] private bool canAttack;
+    public bool isGrappled;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,7 @@ public class PlayerStats : CharacterStats
         damage = 1;
         attackSpeed = 1.5f;
         canAttack = true;
+        isGrappled = false;
     }
 
     public void DealDamage(CharacterStats stats)

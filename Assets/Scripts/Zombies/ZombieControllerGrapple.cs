@@ -11,6 +11,7 @@ public class ZombieContollerGrapple : MonoBehaviour
     private EnemyStats stats = null;
     private bool isStopped = false;
     private bool playerNear = false;
+    private PlayerStats playerStats;
     [SerializeField] Transform target;
 
     void Start()
@@ -18,6 +19,9 @@ public class ZombieContollerGrapple : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         stats = GetComponent<EnemyStats>();
+        
+       // target = GetComponent<Transform>();
+        playerStats = target.GetComponent<PlayerStats>();
     }
     void Update()
     {
@@ -79,8 +83,12 @@ public class ZombieContollerGrapple : MonoBehaviour
 
         if (stats.isDead)
         {
-            anim.SetTrigger("die");
-            Destroy(gameObject, 5);
+            if (stats.killZombie)
+            {
+                anim.SetTrigger("die");
+                stats.killZombie = false;
+                Destroy(gameObject, 5);
+            }
         }
 
     }
@@ -90,9 +98,9 @@ public class ZombieContollerGrapple : MonoBehaviour
         agent.SetDestination(target.position);
         anim.SetBool("playerNear", true);
         anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
-        //RotateToTarget();
+        RotateToTarget();
         float distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (distanceToTarget <= agent.stoppingDistance)
+        if (distanceToTarget <= agent.stoppingDistance+0.05)
         {
             anim.SetFloat("Speed", 0f, 0.0f, Time.deltaTime);
             if (!isStopped)
@@ -104,8 +112,8 @@ public class ZombieContollerGrapple : MonoBehaviour
             if (Time.time >= timeOfLastAttack + stats.attackSpeed)
             {
                 timeOfLastAttack = Time.time;
-                PlayerStats playerStats = target.GetComponent<PlayerStats>();
                 AttackTarget(playerStats);
+                Invoke(nameof(NotGrappled), 4);
             }
         }
         else
@@ -127,10 +135,18 @@ public class ZombieContollerGrapple : MonoBehaviour
 
     private void AttackTarget(PlayerStats playerStats)
     {
-        if (!playerStats.isDead)
+        if (!playerStats.isDead && !playerStats.isGrappled)
         {
             anim.SetTrigger("Attack");
+            anim.SetBool("Grapple",true);
+            playerStats.isGrappled = true;
+            stats.damage = 5;
             stats.DealDamage(playerStats);
         }
+    }
+    private void NotGrappled()
+    {
+        playerStats.isGrappled = false;
+        anim.SetBool("Grapple", false);
     }
 }

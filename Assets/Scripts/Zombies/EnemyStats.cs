@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStats
 {
-    [SerializeField] private int damage;
+    [SerializeField] public int damage;
     [SerializeField] public float attackSpeed;
     [SerializeField] public bool canAttack;
+    public bool killZombie;
     void Start()
     {
         InitVariables();
@@ -27,8 +28,8 @@ public class EnemyStats : CharacterStats
 
     public override void Die()
     {
+        killZombie = true;
         base.Die();
-        //Destroy(gameObject);
     }
     public override void InitVariables() 
     {
@@ -38,6 +39,7 @@ public class EnemyStats : CharacterStats
         damage = 1;
         attackSpeed = 3f;
         canAttack = true;
+        killZombie = false;
     }
 
     public void DealDamage(CharacterStats stats)

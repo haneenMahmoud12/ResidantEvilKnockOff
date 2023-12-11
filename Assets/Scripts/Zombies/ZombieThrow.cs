@@ -12,12 +12,17 @@ public class ZombieThrow : MonoBehaviour
     private bool isStopped = false;
     private bool playerNear = false;
     [SerializeField] Transform target;
+    private bool killZombie = false;
+    public float throwForce = 4f;
+    public Transform bladeArea;
+    public GameObject bladePrefab;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         stats = GetComponent<EnemyStats>();
+        
     }
     void Update()
     {
@@ -79,8 +84,12 @@ public class ZombieThrow : MonoBehaviour
 
         if (stats.isDead)
         {
-            anim.SetTrigger("die");
-            Destroy(gameObject, 5);
+            if (stats.killZombie)
+            {
+                anim.SetTrigger("die");
+                stats.killZombie = false;
+                Destroy(gameObject, 5);
+            }
         }
 
     }
@@ -88,10 +97,12 @@ public class ZombieThrow : MonoBehaviour
     private void MoveToTarget()
     {
         //agent.SetDestination(target.position);
+        PlayerStats playerStats = target.GetComponent<PlayerStats>();
+      //  if (playerStats.health == playerStats.maxHealth) { }
         RotateToTarget();
         anim.SetBool("playerNear", true);
-        PlayerStats playerStats = target.GetComponent<PlayerStats>();
-        AttackTarget(playerStats);
+        if(!isStopped)
+            AttackTarget(playerStats);
         /*anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
         //RotateToTarget();
         float distanceToTarget = Vector3.Distance(target.position, transform.position);
@@ -133,7 +144,20 @@ public class ZombieThrow : MonoBehaviour
         if (!playerStats.isDead)
         {
             anim.SetTrigger("Attack");
-            stats.DealDamage(playerStats);
+            StartCoroutine(ThrowBlade());
+            stats.damage = 3;
+            if (!playerStats.isGrappled)
+                stats.DealDamage(playerStats);
+            isStopped = true;
         }
+    }
+
+    private IEnumerator ThrowBlade()
+    {
+        yield return new WaitForSeconds(1f);
+        GameObject blade = Instantiate(bladePrefab, bladeArea.transform.position, bladeArea.transform.rotation);
+        Rigidbody rb = blade.GetComponent<Rigidbody>();
+        rb.AddForce(blade.transform.forward * throwForce, ForceMode.VelocityChange);
+        
     }
 }

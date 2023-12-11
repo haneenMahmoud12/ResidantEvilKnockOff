@@ -20,6 +20,8 @@ public class ZombieContollerPetroling : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         stats = GetComponent<EnemyStats>();
+        
+      //  GameObject gameObject = GetComponent<GameObject>();
     }
     void Update()
     {
@@ -81,11 +83,15 @@ public class ZombieContollerPetroling : MonoBehaviour
 
         if (stats.isDead)
         {
-            anim.SetTrigger("die");
-           // Destroy(gameObject, 5);
+            if (stats.killZombie)
+            {
+                anim.SetTrigger("die");
+                stats.killZombie = false;
+                Destroy(gameObject, 5);
+            }
         }
 
-        if (!playerNear)
+        if (!playerNear && gameObject!=null)
         {
             if (agent.remainingDistance < 1.5f)
             {
@@ -99,11 +105,12 @@ public class ZombieContollerPetroling : MonoBehaviour
     private void MoveToTarget()
     {
         agent.SetDestination(target.position);
+        transform.LookAt(target);
         anim.SetBool("playerNear", true);
         anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
         //RotateToTarget();
         float distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (distanceToTarget <= agent.stoppingDistance)
+        if (distanceToTarget <= agent.stoppingDistance+0.05)
         {
             anim.SetFloat("Speed", 0f, 0.0f, Time.deltaTime);
             if (!isStopped)
@@ -141,7 +148,9 @@ public class ZombieContollerPetroling : MonoBehaviour
         if (!playerStats.isDead)
         {
             anim.SetTrigger("Attack");
-            stats.DealDamage(playerStats);
+            stats.damage = 2;
+            if (!playerStats.isGrappled)
+                stats.DealDamage(playerStats);
         }
     }
 }
