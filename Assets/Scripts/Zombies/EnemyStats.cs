@@ -13,6 +13,7 @@ public class EnemyStats : CharacterStats
     public GameObject Coins;
     public Transform Transform;
     public int goldAmount=0;
+    public Gold gold;
     void Start()
     {
         InitVariables();
@@ -39,6 +40,7 @@ public class EnemyStats : CharacterStats
         DropCoins();
         var rnd = new System.Random();
         goldAmount = rnd.Next(5, 50);
+        gold.goldAmount = goldAmount;
     }
     private void DropCoins()
     {
@@ -55,6 +57,7 @@ public class EnemyStats : CharacterStats
         attackSpeed = 3f;
         canAttack = true;
         killZombie = false;
+        gold = Coins.GetComponent<Gold>();
     }
 
     public void DealDamage(CharacterStats stats)
