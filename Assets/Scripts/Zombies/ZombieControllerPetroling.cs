@@ -91,6 +91,24 @@ public class ZombieContollerPetroling : MonoBehaviour
             }
         }
 
+        if (stats.isHit)
+        {
+            if (stats.isDead)
+            {
+                if (stats.killZombie)
+                {
+                    anim.SetTrigger("die");
+                    stats.killZombie = false;
+                }
+            }
+            else
+            {
+                anim.SetTrigger("HitReaction");
+                stats.isHit = false;
+            }
+
+        }
+
         if (!playerNear && gameObject!=null)
         {
             if (agent.remainingDistance < 1.5f)

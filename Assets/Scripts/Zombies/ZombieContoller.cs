@@ -87,6 +87,23 @@ public class ZombieContoller : MonoBehaviour
                 //Destroy(gameObject, 5);
             }
         }
+        if (stats.isHit)
+        {
+            if (stats.isDead)
+            {
+                if (stats.killZombie)
+                {
+                    anim.SetTrigger("die");
+                    stats.killZombie = false;
+                }
+            }
+            else
+            {
+                anim.SetTrigger("HitReaction");
+                stats.isHit = false;
+            }
+
+        }
 
     }
 

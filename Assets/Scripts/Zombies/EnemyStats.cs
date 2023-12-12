@@ -14,6 +14,7 @@ public class EnemyStats : CharacterStats
     public Transform Transform;
     public int goldAmount=0;
     public Gold gold;
+    public bool isHit=false;
     void Start()
     {
         InitVariables();

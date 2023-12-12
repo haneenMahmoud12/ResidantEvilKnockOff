@@ -7,12 +7,12 @@ public class ZombieThrow : MonoBehaviour
 {
     private NavMeshAgent agent = null;
     private Animator anim = null;
-    private float timeOfLastAttack = 0;
+    //private float timeOfLastAttack = 0;
     private EnemyStats stats = null;
     private bool isStopped = false;
     private bool playerNear = false;
     [SerializeField] Transform target;
-    private bool killZombie = false;
+    //private bool killZombie = false;
     public float throwForce = 4f;
     public Transform bladeArea;
     public GameObject bladePrefab;
@@ -90,6 +90,24 @@ public class ZombieThrow : MonoBehaviour
                 stats.killZombie = false;
                // Destroy(gameObject, 5);
             }
+        }
+
+        if (stats.isHit)
+        {
+            if (stats.isDead)
+            {
+                if (stats.killZombie)
+                {
+                    anim.SetTrigger("die");
+                    stats.killZombie = false;
+                }
+            }
+            else
+            {
+                anim.SetTrigger("HitReaction");
+                stats.isHit = false;
+            }
+
         }
 
     }

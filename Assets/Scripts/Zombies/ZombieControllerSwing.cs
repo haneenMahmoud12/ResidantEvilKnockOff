@@ -88,6 +88,24 @@ public class ZombieContollerSwing : MonoBehaviour
             }
         }
 
+        if (stats.isHit)
+        {
+            if (stats.isDead)
+            {
+                if (stats.killZombie)
+                {
+                    anim.SetTrigger("die");
+                    stats.killZombie = false;
+                }
+            }
+            else
+            {
+                anim.SetTrigger("HitReaction");
+                stats.isHit = false;
+            }
+            
+        }
+
     }
 
     private void MoveToTarget()
