@@ -97,7 +97,7 @@ public class ZombieThrow : MonoBehaviour
     private void MoveToTarget()
     {
         PlayerStats playerStats = target.GetComponent<PlayerStats>();
-        RotateToTarget();
+        //RotateToTarget();
         anim.SetBool("playerNear", true);
         if(!isStopped)
             AttackTarget(playerStats);
@@ -105,16 +105,18 @@ public class ZombieThrow : MonoBehaviour
 
     private void RotateToTarget()
     {
-        // transform.LookAt(target);
-        Vector3 direction = target.position - transform.position;
+        transform.LookAt(target);
+       /* Vector3 direction = target.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-        transform.rotation = rotation;
+        transform.rotation = rotation;*/
     }
 
     private void AttackTarget(PlayerStats playerStats)
     {
         if (!playerStats.isDead)
         {
+            //agent.transform.forward = target.position;
+            RotateToTarget();
             anim.SetTrigger("Attack");
             StartCoroutine(ThrowBlade());
             stats.damage = 3;

@@ -25,7 +25,7 @@ public class PlayerStats : CharacterStats
     }
     public override void InitVariables()
     {
-        maxHealth = 10;
+        maxHealth = 15;
         SetHealthTo(maxHealth);
         isDead = false;
         damage = 1;
