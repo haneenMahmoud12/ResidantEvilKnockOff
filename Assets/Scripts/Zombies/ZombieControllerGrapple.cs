@@ -98,9 +98,10 @@ public class ZombieContollerGrapple : MonoBehaviour
         agent.SetDestination(target.position);
         anim.SetBool("playerNear", true);
         anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
-        RotateToTarget();
-        float distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (distanceToTarget <= agent.stoppingDistance+0.05)
+        //RotateToTarget();
+        float distanceToTarget = agent.remainingDistance;
+       // float distanceToTarget = Vector3.Distance(target.position, transform.position);
+        if (distanceToTarget <= agent.stoppingDistance)
         {
             anim.SetFloat("Speed", 0f, 0.0f, Time.deltaTime);
             if (!isStopped)
@@ -127,16 +128,18 @@ public class ZombieContollerGrapple : MonoBehaviour
 
     private void RotateToTarget()
     {
-        // transform.LookAt(target);
-        Vector3 direction = target.position - transform.position;
+        agent.transform.forward = target.position;
+        //transform.LookAt(target);
+       /* Vector3 direction = target.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-        transform.rotation = rotation;
+        transform.rotation = rotation;*/
     }
 
     private void AttackTarget(PlayerStats playerStats)
     {
         if (!playerStats.isDead && !playerStats.isGrappled)
         {
+            //RotateToTarget();
             anim.SetTrigger("Attack");
             anim.SetBool("Grapple",true);
             playerStats.isGrappled = true;

@@ -105,12 +105,13 @@ public class ZombieContollerPetroling : MonoBehaviour
     private void MoveToTarget()
     {
         agent.SetDestination(target.position);
-        transform.LookAt(target);
+        //transform.LookAt(target);
         anim.SetBool("playerNear", true);
         anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
         //RotateToTarget();
-        float distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (distanceToTarget <= agent.stoppingDistance+0.05)
+        //float distanceToTarget = Vector3.Distance(target.position, transform.position);
+        float distanceToTarget = agent.remainingDistance;
+        if (distanceToTarget <= agent.stoppingDistance)
         {
             anim.SetFloat("Speed", 0f, 0.0f, Time.deltaTime);
             if (!isStopped)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6ddd96d41cc16634da9f3e2ec17669e4
+guid: 67398cc5825c66348b2786899571a6c2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -17,14 +17,7 @@ ModelImporter:
     removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
-      copied configuration does not match position in animation file:\n\t'mixamorig:LeftUpLeg'
-      : position error = 74.525192 mm\n\t'mixamorig:LeftLeg' : position error = 38.054058
-      mm\n\t'mixamorig:LeftFoot' : position error = 68.279510 mm\n\t'mixamorig:LeftToeBase'
-      : position error = 32.157440 mm\n\t'mixamorig:RightUpLeg' : position error
-      = 74.528061 mm\n\t'mixamorig:RightLeg' : position error = 38.055748 mm\n\t'mixamorig:RightFoot'
-      : position error = 68.279938 mm\n\t'mixamorig:RightToeBase' : position error
-      = 32.157230 mm\n"
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -40,24 +33,24 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: Zombie Punching
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 366
+      lastFrame: 230
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
-      keepOriginalPositionY: 0
+      keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0

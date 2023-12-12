@@ -96,7 +96,8 @@ public class ZombieContollerSwing : MonoBehaviour
         anim.SetBool("playerNear", true);
         anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
         //RotateToTarget();
-        float distanceToTarget = Vector3.Distance(target.position, transform.position);
+        //float distanceToTarget = Vector3.Distance(target.position, transform.position);
+        float distanceToTarget = agent.remainingDistance;
         if (distanceToTarget <= agent.stoppingDistance)
         {
             anim.SetFloat("Speed", 0f, 0.0f, Time.deltaTime);
@@ -124,16 +125,18 @@ public class ZombieContollerSwing : MonoBehaviour
 
     private void RotateToTarget()
     {
+        agent.transform.forward = target.position;
         // transform.LookAt(target);
-        Vector3 direction = target.position - transform.position;
+        /*Vector3 direction = target.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-        transform.rotation = rotation;
+        transform.rotation = rotation;*/
     }
 
     private void AttackTarget(PlayerStats playerStats)
     {
         if (!playerStats.isDead)
         {
+            //RotateToTarget();
             anim.SetTrigger("Attack");
             stats.damage = 2;
             if (!playerStats.isGrappled)
