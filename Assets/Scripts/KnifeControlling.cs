@@ -25,7 +25,7 @@ public class knifeControlling : MonoBehaviour
 
         if (knockedDown)
         {
-            if (durability >= 1 && Input.GetKeyDown(KeyCode.E))
+            if (durability >= 1 && Input.GetKeyDown(KeyCode.K))
             {//stab knocked down enemy
                 durability -= 1;
 
@@ -42,7 +42,7 @@ public class knifeControlling : MonoBehaviour
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("TakenHostage"))
         {
-            if (durability > 1 && Input.GetKeyDown(KeyCode.E) && check)
+            if (durability > 1 && Input.GetKeyDown(KeyCode.K) && check)
             {
 
                 anim.SetBool("stab", true);

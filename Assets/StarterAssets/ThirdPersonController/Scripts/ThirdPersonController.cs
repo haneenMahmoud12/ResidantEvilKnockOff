@@ -157,7 +157,7 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
+           // JumpAndGravity();
             GroundedCheck();
             Move();
         }
@@ -171,7 +171,7 @@ namespace StarterAssets
         {
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
-            _animIDJump = Animator.StringToHash("Jump");
+            //_animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
@@ -283,74 +283,74 @@ namespace StarterAssets
             }
         }
 
-        private void JumpAndGravity()
-        {
-            if (Grounded)
-            {
-                // reset the fall timeout timer
-                _fallTimeoutDelta = FallTimeout;
+        //private void JumpAndGravity()
+        //{
+        //    if (Grounded)
+        //    {
+        //        // reset the fall timeout timer
+        //        _fallTimeoutDelta = FallTimeout;
 
-                // update animator if using character
-                if (_hasAnimator)
-                {
-                    _animator.SetBool(_animIDJump, false);
-                    _animator.SetBool(_animIDFreeFall, false);
-                }
+        //        // update animator if using character
+        //        if (_hasAnimator)
+        //        {
+        //            _animator.SetBool(_animIDJump, false);
+        //            _animator.SetBool(_animIDFreeFall, false);
+        //        }
 
-                // stop our velocity dropping infinitely when grounded
-                if (_verticalVelocity < 0.0f)
-                {
-                    _verticalVelocity = -2f;
-                }
+        //        // stop our velocity dropping infinitely when grounded
+        //        if (_verticalVelocity < 0.0f)
+        //        {
+        //            _verticalVelocity = -2f;
+        //        }
 
-                // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
-                {
-                    // the square root of H * -2 * G = how much velocity needed to reach desired height
-                    _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+        //        // Jump
+        //        if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+        //        {
+        //            // the square root of H * -2 * G = how much velocity needed to reach desired height
+        //            _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
-                    // update animator if using character
-                    if (_hasAnimator)
-                    {
-                        _animator.SetBool(_animIDJump, true);
-                    }
-                }
+        //            // update animator if using character
+        //            if (_hasAnimator)
+        //            {
+        //                _animator.SetBool(_animIDJump, true);
+        //            }
+        //        }
 
-                // jump timeout
-                if (_jumpTimeoutDelta >= 0.0f)
-                {
-                    _jumpTimeoutDelta -= Time.deltaTime;
-                }
-            }
-            else
-            {
-                // reset the jump timeout timer
-                _jumpTimeoutDelta = JumpTimeout;
+        //        // jump timeout
+        //        if (_jumpTimeoutDelta >= 0.0f)
+        //        {
+        //            _jumpTimeoutDelta -= Time.deltaTime;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        // reset the jump timeout timer
+        //        _jumpTimeoutDelta = JumpTimeout;
 
-                // fall timeout
-                if (_fallTimeoutDelta >= 0.0f)
-                {
-                    _fallTimeoutDelta -= Time.deltaTime;
-                }
-                else
-                {
-                    // update animator if using character
-                    if (_hasAnimator)
-                    {
-                        _animator.SetBool(_animIDFreeFall, true);
-                    }
-                }
+        //        // fall timeout
+        //        if (_fallTimeoutDelta >= 0.0f)
+        //        {
+        //            _fallTimeoutDelta -= Time.deltaTime;
+        //        }
+        //        else
+        //        {
+        //            // update animator if using character
+        //            if (_hasAnimator)
+        //            {
+        //                _animator.SetBool(_animIDFreeFall, true);
+        //            }
+        //        }
 
-                // if we are not grounded, do not jump
-                _input.jump = false;
-            }
+        //        // if we are not grounded, do not jump
+        //        _input.jump = false;
+        //    }
 
-            // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-            if (_verticalVelocity < _terminalVelocity)
-            {
-                _verticalVelocity += Gravity * Time.deltaTime;
-            }
-        }
+        //    // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
+        //    if (_verticalVelocity < _terminalVelocity)
+        //    {
+        //        _verticalVelocity += Gravity * Time.deltaTime;
+        //    }
+        //}
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
@@ -399,6 +399,42 @@ namespace StarterAssets
         public void SetRotateOnMove(bool newRotateOnMove)
         {
             _rotateOnMove = newRotateOnMove;
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("Item") && Input.GetKeyUp(KeyCode.E))
+            {
+
+                _animator.SetBool("Pick", true);
+
+                // Start a delayed action without passing parameters
+                Invoke("DelayedActionWrapper", 0.7f);
+            }
+        }
+
+        // This method serves as a wrapper to call DelayedAction with the necessary parameters
+        private void DelayedActionWrapper()
+        {
+            // Access the necessary Collider or GameObject here
+            // For example, find the GameObject with the "Item" tag:
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f);
+            foreach (Collider collider in colliders)
+            {
+                if (collider.CompareTag("Item"))
+                {
+                    // Call DelayedAction and pass the Collider as a parameter
+                    DelayedAction(collider);
+                    break;
+                }
+            }
+        }
+
+        private void DelayedAction(Collider other)
+        {
+            other.gameObject.SetActive(false);
+            _animator.SetBool("Pick", false);
+
         }
     }
 }
