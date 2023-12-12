@@ -388,24 +388,63 @@ namespace StarterAssets
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
-        private void OnTriggerEnter(Collider other)
-        {
-           
-            if (other.CompareTag("Item") )
-            {
-                //&& Input.GetKeyUp(KeyCode.E)
-                // Set the "Pick" trigger parameter to true
-                _animator.SetBool("Pick",true);
+        /*  private void OnTriggerStay(Collider other)
+          {
 
-                // Optionally, you can disable the item object or perform other actions
-                //StartCoroutine(DelayedAction());
-                Invoke("DelayedAction", 500.0f);
-                other.gameObject.SetActive(false);
+              if (other.CompareTag("Item") && Input.GetKeyUp(KeyCode.E))
+              {
+                  //&& Input.GetKeyUp(KeyCode.E)
+                  // Set the "Pick" trigger parameter to true
+                  _animator.SetBool("Pick",true);
+
+                  // Optionally, you can disable the item object or perform other actions
+                  //StartCoroutine(DelayedAction());
+                  Invoke("DelayedAction(other)", 5.0f);
+                  // other.gameObject.SetActive(false);
+
+              }
+          }
+          private void DelayedAction(Collider other)
+          {
+              other.gameObject.SetActive(false);
+              _animator.SetBool("Pick", false);
+              Debug.Log("d5lt y hbla ");
+          }*/
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("Item") && Input.GetKeyUp(KeyCode.E))
+            {
+                
+                _animator.SetBool("Pick", true);
+                
+                // Start a delayed action without passing parameters
+                Invoke("DelayedActionWrapper", 0.7f);
             }
         }
-        private void DelayedAction()
+
+        // This method serves as a wrapper to call DelayedAction with the necessary parameters
+        private void DelayedActionWrapper()
         {
-            
+            // Access the necessary Collider or GameObject here
+            // For example, find the GameObject with the "Item" tag:
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f);
+            foreach (Collider collider in colliders)
+            {
+                if (collider.CompareTag("Item"))
+                {
+                    // Call DelayedAction and pass the Collider as a parameter
+                    DelayedAction(collider);
+                    break;
+                }
+            }
         }
+
+        private void DelayedAction(Collider other)
+        {
+            other.gameObject.SetActive(false);
+            _animator.SetBool("Pick", false);
+           
+        }
+
     }
 }
