@@ -13,8 +13,10 @@ public class ZombieThrow : MonoBehaviour
     private bool playerNear = false;
     [SerializeField] Transform target;
     //private bool killZombie = false;
-    public float throwForce = 4f;
+    public float throwForce = 70f;
+    public float throwUpwardForce=4f;
     public Transform bladeArea;
+    public Transform launchPoint;
     public GameObject bladePrefab;
 
     void Start()
@@ -147,9 +149,15 @@ public class ZombieThrow : MonoBehaviour
     private IEnumerator ThrowBlade()
     {
         yield return new WaitForSeconds(1f);
-        GameObject blade = Instantiate(bladePrefab, bladeArea.transform.position, bladeArea.transform.rotation);
+        //GameObject blade = Instantiate(bladePrefab, agent.transform, true);
+        GameObject blade = Instantiate(bladePrefab, launchPoint.position,agent.transform.rotation);
+        //GameObject blade = Instantiate(bladePrefab, bladeArea.transform.position, bladeArea.transform.rotation);
         Rigidbody rb = blade.GetComponent<Rigidbody>();
-        rb.AddForce(blade.transform.forward * throwForce, ForceMode.VelocityChange);
+        //rb.velocity = throwForce*launchPoint.up;
+        //rb.AddForce(blade.transform.forward);
+        Vector3 forceToAdd = agent.transform.forward * throwForce + transform.up * throwUpwardForce;
+
+        rb.AddForce(forceToAdd,ForceMode.Impulse);
         
     }
 }

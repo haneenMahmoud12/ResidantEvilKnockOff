@@ -145,7 +145,7 @@ public class ZombieContollerGrapple : MonoBehaviour
 
     private void RotateToTarget()
     {
-        agent.transform.forward = target.position;
+        agent.transform.forward = -target.position;
         //transform.LookAt(target);
        /* Vector3 direction = target.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
@@ -156,7 +156,7 @@ public class ZombieContollerGrapple : MonoBehaviour
     {
         if (!playerStats.isDead && !playerStats.isGrappled)
         {
-            //RotateToTarget();
+            RotateToTarget();
             anim.SetTrigger("Attack");
             anim.SetBool("Grapple",true);
             playerStats.isGrappled = true;
