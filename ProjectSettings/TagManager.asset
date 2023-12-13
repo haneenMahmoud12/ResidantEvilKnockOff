@@ -8,6 +8,9 @@ TagManager:
   - Zombie
   - Gun
   - enemy
+  - Item
+  - flashGrenade
+  - handGrenade
   layers:
   - Default
   - TransparentFX

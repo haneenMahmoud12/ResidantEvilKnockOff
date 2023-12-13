@@ -7,7 +7,7 @@ public class Grenade1 : MonoBehaviour
     public float grenadeTimer = 3f;
     float countDown;
     public float radius = 5f;
-    public float giveDamage = 4f;
+    public int giveDamage = 4;
     //public GameObject explosionEffect;
     public int buyPrice = 15;
     public int sellPrice = 10;
@@ -38,16 +38,18 @@ public class Grenade1 : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (Collider nearbyObject in colliders)
         {
-            GrenadeDamageScript obj = nearbyObject.GetComponent<GrenadeDamageScript>();
+            EnemyStats obj = nearbyObject.GetComponent<EnemyStats>();
             if (obj != null)
             {
                 if (gameObject.tag == "handGrenade")
                 {
-
-                    obj.objectHitDamage(giveDamage);
+                    Debug.Log("hi");
+                    obj.TakeDamage(giveDamage);
+                    
                 }
                 if (gameObject.tag == "flashGrenade")
                 {
+                 
 
                     obj.objectKnockedDown();
 

@@ -10,7 +10,7 @@ public class GrenadeDamageScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+       // anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -18,6 +18,7 @@ public class GrenadeDamageScript : MonoBehaviour
     {
 
     }
+    //take damage
     public void objectHitDamage(float amount)
     {
         objectHealth -= amount;
@@ -27,6 +28,7 @@ public class GrenadeDamageScript : MonoBehaviour
             DestroyObject();
         }
     }
+
     public void objectKnockedDown()
     {
 

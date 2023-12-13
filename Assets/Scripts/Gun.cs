@@ -74,13 +74,13 @@ public class Gun : MonoBehaviour
                // hitTransform = hitInfo.transform;
                // ray.origin = hitInfo.point;
                //  Debug.DrawLine(ray.origin, hitInfo.point,Color.red,2.0f);
-               // Instantiate(vfxHitGreen, hitInfo.point, Quaternion.identity);
-                EnemyStats enemy = hitInfo.transform.GetComponent<EnemyStats>();
-                if (enemy != null)
-                    Debug.Log("hi" + enemy.tag);
-                EnemyStats enemy1 = hitInfo.collider.transform.GetComponent<EnemyStats>();
-                if (enemy1 != null)
-                    Debug.Log("hello" + enemy1.tag);
+                Instantiate(vfxHitGreen, hitInfo.point, Quaternion.identity);
+                //EnemyStats enemy = hitInfo.transform.GetComponent<EnemyStats>();
+                //if (enemy != null)
+                //    Debug.Log("hi" + enemy.tag);
+                //EnemyStats enemy1 = hitInfo.collider.transform.GetComponent<EnemyStats>();
+                //if (enemy1 != null)
+                //    Debug.Log("hello" + enemy1.tag);
                 Vector3 aimDir = (hitInfo.point - SpawnBullet.position).normalized;
 
                 Instantiate(pfBullet, SpawnBullet.position, Quaternion.LookRotation(aimDir, Vector3.up));
@@ -132,13 +132,13 @@ public class Gun : MonoBehaviour
                    // hitTransform = hitInfo.transform;
                    // ray.origin = hitInfo.point;
                    //  Debug.DrawLine(ray.origin, hitInfo.point,Color.red,2.0f);
-                   // Instantiate(vfxHitGreen, hitInfo.point, Quaternion.identity);
-                    EnemyStats enemy = hitInfo.transform.GetComponent<EnemyStats>();
-                    if (enemy != null)
-                        Debug.Log("hi" + enemy.tag);
-                    EnemyStats enemy1 = hitInfo.collider.transform.GetComponent<EnemyStats>();
-                    if (enemy1 != null)
-                        Debug.Log("hello" + enemy1.tag);
+                   Instantiate(vfxHitGreen, hitInfo.point, Quaternion.identity);
+                    //EnemyStats enemy = hitInfo.transform.GetComponent<EnemyStats>();
+                    //if (enemy != null)
+                    //    Debug.Log("hi" + enemy.tag);
+                    //EnemyStats enemy1 = hitInfo.collider.transform.GetComponent<EnemyStats>();
+                    //if (enemy1 != null)
+                    //    Debug.Log("hello" + enemy1.tag);
                     Vector3 aimDir = (hitInfo.point - SpawnBullet.position).normalized;
 
                     Instantiate(pfBullet, SpawnBullet.position, Quaternion.LookRotation(aimDir, Vector3.up));
