@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class knifeControlling : MonoBehaviour
 {
     public int durability;
     public Animator anim;
-    GrenadeDamageScript obj;
+    EnemyStats obj;
     // Start is called before the first frame update
     void Start()
     {
         durability = 10;
         anim = GetComponent<Animator>();
-        obj = GetComponent<GrenadeDamageScript>();
+        obj = GetComponent<EnemyStats>();
     }
 
     // Update is called once per frame
@@ -55,8 +56,10 @@ public class knifeControlling : MonoBehaviour
     IEnumerator stabKnockedDownEnemy()
     {
         anim.SetBool("stabKnockedDown", true);
+        anim.SetLayerWeight(2, 1);
         yield return new WaitForSeconds(2f);
         anim.SetBool("stabKnockedDown", false);
+        anim.SetLayerWeight(2, 0);
         //yield return new WaitForSeconds(1f);
 
     }
@@ -80,7 +83,7 @@ public class knifeControlling : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, goWithTag[i].transform.position) <= minimumDistance)
             {
-                GrenadeDamageScript obj = goWithTag[i].GetComponent<GrenadeDamageScript>();
+                EnemyStats obj = goWithTag[i].GetComponent<EnemyStats>();
                 if (obj != null)
                 {
                     return obj.isEnemyKnockedDown;

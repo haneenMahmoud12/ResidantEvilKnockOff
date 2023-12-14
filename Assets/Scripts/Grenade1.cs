@@ -8,7 +8,7 @@ public class Grenade1 : MonoBehaviour
     float countDown;
     public float radius = 5f;
     public int giveDamage = 4;
-    //public GameObject explosionEffect;
+    public GameObject explosionEffect;
     public int buyPrice = 15;
     public int sellPrice = 10;
     bool hasExploded = false;
@@ -33,7 +33,7 @@ public class Grenade1 : MonoBehaviour
 
     void Explode()
     {
-      //  Instantiate(explosionEffect, transform.position, transform.rotation);
+        Instantiate(explosionEffect, transform.position, transform.rotation);
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (Collider nearbyObject in colliders)
