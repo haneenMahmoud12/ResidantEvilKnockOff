@@ -4,15 +4,25 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - DayLightRoomZombie
   - DiningRoomZombie
   - VisitRoomZombie
   - OfficeZombie
+=======
+  - CinemachineTarget
+  - Zombie
+  - Gun
+  - enemy
+  - Item
+  - flashGrenade
+  - handGrenade
+>>>>>>> 7309e2c1b3dcb1d4d1ea8335494a9cf31bbc63ee
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - player
   - Water
   - UI
   - Enemy

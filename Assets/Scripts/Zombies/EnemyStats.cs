@@ -15,21 +15,55 @@ public class EnemyStats : CharacterStats
     public int goldAmount=0;
     public Gold gold;
     public bool isHit=false;
+
+    public Animator anim;
+    public bool isEnemyKnockedDown = false;
+    public HealthBar healthBar;
+
     void Start()
     {
         InitVariables();
+        healthBar.SetMaxHealth(maxHealth);
     }
 
+    public override void TakeDamage(int damage)
+    {
+        if (health > 0)
+        {
+            health = health - damage;
+            //Debug.Log(health);
+            healthBar.SetHealth(health);
+        }
+        if (health == 0)
+            Die();
+    }
+
+    public void objectKnockedDown()
+    {
+        StartCoroutine(KnockingDownAnim());
+    }
+
+
+    IEnumerator KnockingDownAnim()
+    {
+        isEnemyKnockedDown = true;
+        anim.SetBool("isKnockedDown", true);
+        yield return new WaitForSeconds(5f);
+        isEnemyKnockedDown = false;
+        anim.SetBool("isKnockedDown", false);
+    }
     public override void CheckHealth()
     {
         if (health <= 0)
         {
             health = 0;
+            healthBar.SetHealth(0);
             Die();
         }
         if (health >= maxHealth)
         {
             health = maxHealth;
+            healthBar.SetMaxHealth(maxHealth);
         }
     }
 
@@ -42,6 +76,8 @@ public class EnemyStats : CharacterStats
         var rnd = new System.Random();
         goldAmount = rnd.Next(5, 50);
         gold.goldAmount = goldAmount;
+        health = 0;
+        healthBar.SetHealth(0);
     }
     private void DropCoins()
     {
