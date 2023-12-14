@@ -8,10 +8,11 @@ public class knifeControlling : MonoBehaviour
     public int durability;
     public Animator anim;
     EnemyStats obj;
+   
     // Start is called before the first frame update
     void Start()
     {
-        durability = 10;
+        durability = 5;
         anim = GetComponent<Animator>();
         obj = GetComponent<EnemyStats>();
     }
@@ -20,29 +21,40 @@ public class knifeControlling : MonoBehaviour
     void Update()
     {
         //GrenadeDamageScript[] enemies = GrenadeDamageScript.t("enemy");
-        bool check = CheckCloseToTag("enemy", 2);
-        bool knockedDown = isEnemyKnockedDown("enemy", 2);
+       // bool check = CheckCloseToTag("enemy", 2);
+        //bool knockedDown = isEnemyKnockedDown("enemy", 2);
 
 
-        if (knockedDown)
-        {
+        
+            
+            
             if (durability >= 1 && Input.GetKeyDown(KeyCode.K))
-            {//stab knocked down enemy
+
+            {
+            bool knockedDown = isEnemyKnockedDown("enemy", 2);
+            if (knockedDown)
+            {
+
+                //ACTIVATE KNIFE GAMEOBJECT
+                //stab knocked down enemy
                 durability -= 1;
+                Debug.Log("knockeddown");
 
                 StartCoroutine(stabKnockedDownEnemy());
                 //deplete all enemy's health
 
 
-
             }
+            
 
 
         }
 
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("TakenHostage"))
-        {
+        //if (anim.GetCurrentAnimatorStateInfo(0).IsName("TakenHostage"))
+        if(anim.GetBool("isGrappled"))
+        { //ACTIVATE KNIFE GAMEOBJECT
+            bool check = CheckCloseToTag("enemy", 2);
             if (durability > 1 && Input.GetKeyDown(KeyCode.K) && check)
             {
 
@@ -55,12 +67,14 @@ public class knifeControlling : MonoBehaviour
     }
     IEnumerator stabKnockedDownEnemy()
     {
+        Debug.Log("animation");
         anim.SetBool("stabKnockedDown", true);
         anim.SetLayerWeight(2, 1);
         yield return new WaitForSeconds(2f);
         anim.SetBool("stabKnockedDown", false);
         anim.SetLayerWeight(2, 0);
         //yield return new WaitForSeconds(1f);
+
 
     }
     bool CheckCloseToTag(string tag, float minimumDistance)
@@ -86,6 +100,7 @@ public class knifeControlling : MonoBehaviour
                 EnemyStats obj = goWithTag[i].GetComponent<EnemyStats>();
                 if (obj != null)
                 {
+                    obj.Die();
                     return obj.isEnemyKnockedDown;
                 }
 

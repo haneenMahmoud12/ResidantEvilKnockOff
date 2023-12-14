@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grenadeTimer: 3
-  radius: 5
+  radius: 15
   giveDamage: 4
   explosionEffect: {fileID: 1972207730512856, guid: ea4fb55d0227e604386f44f905cfe7c0, type: 3}
   buyPrice: 15

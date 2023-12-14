@@ -39,6 +39,8 @@ public class EnemyStats : MonoBehaviour
 
     public  void Die()
     {
+        enemyData.health = 0;
+        healthBar.SetHealth(0);
         animator.SetBool("die", true);
         //Destroy(gameObject);
     }

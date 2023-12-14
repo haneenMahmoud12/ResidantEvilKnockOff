@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WarZombie
   m_EditorClassIdentifier: 
   damage: 0
-  health: 194
+  health: 0
   attackSpeed: 0
   canAttack: 0
   maxHealth: 50
