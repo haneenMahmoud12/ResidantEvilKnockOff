@@ -9,7 +9,7 @@ using TMPro;
 
 public class InventoryScript : MonoBehaviour
 {
-    [SerializeField] List<GameObject> inventory;
+    public List<GameObject> inventory;
     [SerializeField] Card greenHerb;
     [SerializeField] Card redHerb;
     [SerializeField] Card pistol;
@@ -38,32 +38,236 @@ public class InventoryScript : MonoBehaviour
     [SerializeField] Card spadeCard;
     [SerializeField] TMP_Text healthPoints;
     [SerializeField] TMP_Text gold;
+
+    public int leonHealthPoints = 10;
+    public int leonGold = 30;
+    public int leonKniefDurability = 8;
+    public string leonEquippedWeapon = "";
+    public string leonEquippedGrenade ="";
+
+
     [SerializeField] TMP_Text equippedWeapon;
     [SerializeField] TMP_Text equippedGrenade;
     [SerializeField] TMP_Text kniefDurability;
+   
     [SerializeField] Button use;
     [SerializeField] Button discard;
     [SerializeField] Button equip;
     [SerializeField] Button combine;
-    
+
+    [SerializeField] TMP_Text combineeText;
+    [SerializeField] Button confirmCombine;
+
+
+
+    [SerializeField] GameObject inventoryCanvas;
+    [SerializeField] GameObject craftingCanvas;
+    public int indexCombinee;
     string selectedItem;
+
+    CraftingScript craftingScript;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-     //   CheckCardType();
+        if (craftingCanvas != null)
+        {
+            craftingScript = craftingCanvas.GetComponent<CraftingScript>();
+        }
+
+
+        gold.SetText(leonGold.ToString());
+
+        kniefDurability.SetText(leonKniefDurability.ToString());
+        healthPoints.SetText(leonHealthPoints.ToString());
+        equippedWeapon.SetText(leonEquippedWeapon.ToString());
+        equippedGrenade.SetText(leonEquippedGrenade.ToString());
+
+        //   CheckCardType();
     }
     private void Update()
     {
-        if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            discard.interactable = false;
-            use.interactable = false;
-            combine.interactable = false;
-            equip.interactable = false;
+            
+            bool reload = ReloadWeapon();
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+
+            bool reload = ThrowGrenade();
+            Debug.Log(reload);
+        }
+
+    }
+
+    public void collectItem(string item)
+    {
+        bool flag = false;
+        foreach (GameObject inventoryItem in inventory) {
+            InventoryCardScript script = inventoryItem.GetComponent<InventoryCardScript>();
+
+            if (script.card == null)
+            {
+                switch (item)
+                {
+                    case "Green Herb": script.card = greenHerb;break;
+                    case "Red Herb": script.card = redHerb;break;
+                    case "Normal Gunpowder": script.card = normalGunPowder; break;
+                    case "High-Grade Gunpowder": script.card = highGradeGunPowder; break;
+                    case "Hand Gernade": script.card = handGrenade ; break;
+                    case "Flash Gernade": script.card = flashGrenade; break;
+                    case "Revolver": script.card = revolver; break;
+                    case "Rifle": script.card = rifle; break;
+                    case "Shotgun": script.card = shotGun; break;
+                    case "Emblem": script.card = emblem; break;
+                    case "Spade Key ": script.card = spadeCard; break;
+                    case "Heart Key":script.card = heartKey;
+                        break;
+                    case "Club Key": script.card = clubKey; break;
+                    case "Diamond Key": script.card = diamondKey; break;
+                    case "Gold Bar": script.card = goldBar; break;
+                    case "Ruby": script.card = ruby; break;
+                    case "Emerald": script.card = goldBar; break;
+                    case "Green + Green Mixture": script.card = ggMixture; break;
+                    case "Green + Red Mixture": script.card = grMixture; break;
+                    case "Red + Red Mixture": script.card = rrMixture; break;
+                    default:; break;
+                }
+                script.Initialize();
+
+                flag = true;
+                break;
+              
+            }
+
+        }
+        Debug.Log(flag);
+/*        return flag;
+*/
+    }
+
+    public void collectAmmo (string item , int ammount)
+    {
+        if (item == "Pistol Ammo" || item == "Rifle Ammo" || item == "Shotgun Ammo" || item == "Revolver Ammo")
+        {
+
+
+            bool flag = false;
+            int index = -1;
+            int i = 0;
+            bool ammoFound = false;
+            foreach (GameObject inventoryItem in inventory)
+            {
+                InventoryCardScript script = inventoryItem.GetComponent<InventoryCardScript>();
+                if (script.card == null && index == -1)
+                {
+                    index = i;
+
+                }
+                else if (script.cardName.text == item)
+                {
+
+                    script.quantity.SetText((Int32.Parse(script.quantity.text) + ammount).ToString());
+                    ammoFound = true;
+                    break;
+                }
+                i++;
+            }
+
+            if (ammoFound == true)
+            {
+                /*            return true;
+                */
+            }
+            else if (index != -1)
+            {
+                InventoryCardScript script = inventory[index].GetComponent<InventoryCardScript>();
+
+                switch (item)
+                {
+                    case "Rifle Ammo": script.card = rifleAmmo; break;
+                    case "Pistol Ammo": script.card = pistolAmmo; break;
+                    case "Revolver Ammo":
+                        script.card = revolverAmmo; break;
+                    case "Shotgun Ammo":
+                        script.card = shotGunAmmo; break;
+                    default:; break;
+                }
+                script.Initialize();
+
+            }
+        }
+    }
+
+    public void collectGold(int goldAmmount)
+    {
+        leonGold += goldAmmount;
+        gold.SetText((Int32.Parse(gold.text)+goldAmmount).ToString());
+
+
+    }
+
+    public bool UseGold(int goldAmmount)
+    {
+        if (Int32.Parse(gold.text) >= goldAmmount)
+        {
+            leonGold -= goldAmmount;
+            gold.SetText((Int32.Parse(gold.text) - goldAmmount).ToString());
+            return true;
+        }
+        return false;
+
+
+    }
+
+    public void IncreasePlayerHealth(int points)
+    {
+        if (Int32.Parse(healthPoints.text) < 8)
+        {
+            healthPoints.SetText((Int32.Parse(healthPoints.text) + points).ToString());
+            leonHealthPoints += points;
+            if (Int32.Parse(healthPoints.text) > 8)
+            {
+                healthPoints.SetText("8");
+                leonHealthPoints = 8;
+            }
+        }
+
+    }
+
+    public bool DecreasePlayerHealth(int points)
+    {
+       
+        healthPoints.SetText((Int32.Parse(healthPoints.text) - points).ToString());
+        leonHealthPoints -= points;
+        if (Int32.Parse(healthPoints.text) <= 0)
+        {
+            leonHealthPoints = 0;
+            healthPoints.SetText("0");
+            return true;
+        }
+        return false;
+        
+    }
+
+    public void RestoreKniefDurability()
+    {
+        leonKniefDurability = 8;
+        kniefDurability.SetText("8");
+        leonGold -= 100;
+        gold.SetText(leonGold.ToString());
+    }
+
+    public void DecreaseKniefDurability(int ammount)
+    {
+        leonKniefDurability -= ammount;
+        if (leonKniefDurability < 0)
+            leonKniefDurability = 0;
+        kniefDurability.SetText(leonKniefDurability.ToString());
 
     }
 
@@ -73,8 +277,9 @@ public class InventoryScript : MonoBehaviour
         if (button != null)
         {
             selectedItem = button.name;
-            NewBehaviourScript script = button.GetComponent<NewBehaviourScript>();
+            InventoryCardScript script = button.GetComponent<InventoryCardScript>();
             CheckCardType(script);
+            confirmCombine.interactable = true;
 
         }
         else
@@ -89,16 +294,18 @@ public class InventoryScript : MonoBehaviour
 
         int index = selectedItem == "Button1" ? 1 : (selectedItem == "Button2" ? 2 : (selectedItem == "Button3" ? 3 : (selectedItem == "Button4" ? 4 :
            (selectedItem == "Button5" ? 5 : 6))));
-        inventory[index - 1].GetComponent<NewBehaviourScript>().card = null;
-        inventory[index - 1].GetComponent<NewBehaviourScript>().cardName.text = "";
-        inventory[index - 1].GetComponent<NewBehaviourScript>().quantity.text = "";
+        inventory[index - 1].GetComponent<InventoryCardScript>().card = null;
+        inventory[index - 1].GetComponent<InventoryCardScript>().cardName.text = "";
+        inventory[index - 1].GetComponent<InventoryCardScript>().quantity.text = "";
         Color newColor = new Color(1, 1, 1, 0);
-        inventory[index - 1].GetComponent<NewBehaviourScript>().image.color = newColor;
-        inventory[index - 1].GetComponent<NewBehaviourScript>().image.sprite = null;
+        inventory[index - 1].GetComponent<InventoryCardScript>().image.color = newColor;
+        inventory[index - 1].GetComponent<InventoryCardScript>().image.sprite = null;
+        inventory[index - 1].GetComponent<InventoryCardScript>().Initialize();
         discard.interactable = false;
         use.interactable = false;
         combine.interactable = false;
         equip.interactable = false;
+        
 
 
     }
@@ -112,7 +319,7 @@ public class InventoryScript : MonoBehaviour
 
 
         GameObject item = inventory[index-1];
-        NewBehaviourScript script = item.GetComponent<NewBehaviourScript>();
+        InventoryCardScript script = item.GetComponent<InventoryCardScript>();
         if (script.cardName.text == "Green Herb")
         {
         
@@ -128,12 +335,12 @@ public class InventoryScript : MonoBehaviour
             healthPoints.SetText((Int32.Parse(healthPoints.text) + 8).ToString());
         }
 
-        inventory[index-1].GetComponent<NewBehaviourScript>().card = null;
-        inventory[index-1].GetComponent<NewBehaviourScript>().cardName.text = "";
-        inventory[index-1].GetComponent<NewBehaviourScript>().quantity.text = "";
+        inventory[index-1].GetComponent<InventoryCardScript>().card = null;
+        inventory[index-1].GetComponent<InventoryCardScript>().cardName.text = "";
+        inventory[index-1].GetComponent<InventoryCardScript>().quantity.text = "";
         Color newColor = new Color(1, 1, 1, 0);
-        inventory[index - 1].GetComponent<NewBehaviourScript>().image.color = newColor;
-        inventory[index-1].GetComponent<NewBehaviourScript>().image.sprite = null;
+        inventory[index - 1].GetComponent<InventoryCardScript>().image.color = newColor;
+        inventory[index-1].GetComponent<InventoryCardScript>().image.sprite = null;
         discard.interactable = false;
         use.interactable = false;
         combine.interactable = false;
@@ -145,9 +352,100 @@ public class InventoryScript : MonoBehaviour
 
     public void Combine()
     {
+        int index = selectedItem == "Button1" ? 1 : (selectedItem == "Button2" ? 2 : (selectedItem == "Button3" ? 3 : (selectedItem == "Button4" ? 4 :
+           (selectedItem == "Button5" ? 5 : 6))));
+
+        Debug.Log(inventory);
+        indexCombinee = index - 1;
+        GameObject item = inventory[index - 1];
+        string combinee = item.GetComponent<InventoryCardScript>().cardName.text;
+        int i = 0;
+
+
+        craftingCanvas.SetActive(true);
+        if(craftingScript == null)
+        {
+            craftingScript = craftingCanvas.GetComponent<CraftingScript>();
+        }
+     
+        int indexLoop = 0;
+        foreach (GameObject inventoryItem in craftingScript.inventory)
+        {
+            inventoryItem.GetComponent<InventoryCardScript>().card = inventory[indexLoop].GetComponent<InventoryCardScript>().card;
+            inventoryItem.GetComponent<InventoryCardScript>().Initialize();
+            indexLoop++;
+
+        }
+
+
+        foreach (GameObject inventoryItem in craftingScript.inventory)
+        {
+            InventoryCardScript script = inventoryItem.GetComponent<InventoryCardScript>();
+            Debug.Log(script);
+            if (i == index - 1)
+            {
+                inventoryItem.SetActive(false);
+
+            }
+            else if (combinee == "Green Herb" || combinee == "Red Herb")
+            {
+                if (script.cardName.text == "Green Herb" || script.cardName.text == "Red Herb")
+                {
+
+                    inventoryItem.SetActive(true);
+
+                }
+                else
+                {
+                    inventoryItem.SetActive(false);
+                }
+            }
+            else if (combinee == "Normal Gunpowder" || combinee == "High-Grade Gunpowder")
+            {
+                if (script.cardName.text == "Normal Gunpowder" || script.cardName.text == "High-Grade Gunpowder")
+                {
+
+                    inventoryItem.SetActive(true);
+
+                }
+                else
+                {
+                    inventoryItem.SetActive(false);
+                }
+            }
+            i++;
+        }
+
+        inventoryCanvas.SetActive(false);
+        combineeText.SetText(combinee);
+        discard.interactable = false;
+        use.interactable = false;
+        combine.interactable = false;
+        equip.interactable = false;
+        confirmCombine.interactable = false;
+
+
+
+
+
+
 
 
     }
+
+    public void RemoveItem(int item)
+
+    {
+        InventoryCardScript script = inventory[item].GetComponent<InventoryCardScript>();
+        script.card = null;
+        script.cardName.text = "";
+        script.quantity.text = "";
+        Color newColor = new Color(1, 1, 1, 0);
+        script.image.color = newColor;
+        script.image.sprite = null;
+        script.Initialize();
+    }
+
 
     public void Equip()
     {
@@ -158,16 +456,18 @@ public class InventoryScript : MonoBehaviour
 
 
         GameObject item = inventory[index - 1];
-        NewBehaviourScript script = item.GetComponent<NewBehaviourScript>();
+        InventoryCardScript script = item.GetComponent<InventoryCardScript>();
         if (script.cardName.text == "Rifle" || script.cardName.text == "Shotgun" ||
                 script.cardName.text == "Revolver" || script.cardName.text == "Pistol")
         {
             equippedWeapon.SetText(script.cardName.text);
+            leonEquippedWeapon = script.cardName.text;
 
         }
-        else if (script.cardName.text == "Hand Gerande" || script.cardName.text == "Flash Gerande")
+        else if (script.cardName.text == "Hand Gernade" || script.cardName.text == "Flash Gernade")
         {
             equippedGrenade.SetText(script.cardName.text);
+            leonEquippedGrenade = script.cardName.text;
 
         }
         discard.interactable = false;
@@ -176,7 +476,7 @@ public class InventoryScript : MonoBehaviour
         equip.interactable = false;
 
     }
-    public void CheckCardType(NewBehaviourScript script)
+    public void CheckCardType(InventoryCardScript script)
     {
                 
         if (script.card != null)
@@ -195,7 +495,8 @@ public class InventoryScript : MonoBehaviour
             }
 
 
-            if (script.cardName.text == "Green Herb" || script.cardName.text == "Red Herb")
+            if (script.cardName.text == "Green Herb" || script.cardName.text == "Red Herb" ||
+                script.cardName.text == "High-Grade Gunpowder" || script.cardName.text == "Normal Gunpowder")
             {
                 combine.interactable = true;
             }
@@ -203,10 +504,10 @@ public class InventoryScript : MonoBehaviour
             {
                 combine.interactable = false;
             }
-
+            
             if (script.cardName.text == "Rifle" || script.cardName.text == "Shotgun" ||
                 script.cardName.text == "Revolver" || script.cardName.text == "Pistol" ||
-                script.cardName.text == "Hand Gerande" || script.cardName.text == "Flash Gerande")
+                script.cardName.text == "Hand Gernade" || script.cardName.text == "Flash Gernade")
             {
                 equip.interactable = true;
             }
@@ -239,4 +540,230 @@ public class InventoryScript : MonoBehaviour
 
 
     }
+
+    public bool canFire()
+    {
+        bool canFire = false;
+        if (leonEquippedGrenade != "")
+        {
+            return false;
+        }
+        else
+        {
+            foreach(GameObject item in inventory)
+            {
+                if (item.GetComponent<InventoryCardScript>().cardName.text == leonEquippedWeapon)
+                {
+                    if (item.GetComponent<InventoryCardScript>().ammosAmmount.text != "0")
+                    {
+                        canFire = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return canFire;
+    }
+
+    public bool ReloadWeapon()
+    {
+        if(leonEquippedWeapon == "")
+        {
+            return false;
+        }
+        bool canReload = true;
+        bool ammosFound = false;
+        int ammosIndex = 0;
+        foreach (GameObject item in inventory)
+        {
+            if (item.GetComponent<InventoryCardScript>().cardName.text == leonEquippedWeapon + " Ammo")
+            {
+                ammosFound = true;
+                break;
+            }
+            ammosIndex++;
+
+        }
+        if (!ammosFound)
+        {
+            return false;
+        }
+        foreach (GameObject item in inventory)
+        {
+            InventoryCardScript script = item.GetComponent<InventoryCardScript>();
+            if (script.cardName.text == leonEquippedWeapon)
+            {
+                if(script.ammosAmmount.text == script.card.capacityAmmo.ToString())
+                {
+                    canReload = false;
+                    break;
+                }
+                else
+                {
+                    int ammosAvaliable = Int32.Parse(inventory[ammosIndex].GetComponent<InventoryCardScript>().quantity.text);
+                    int clipCapacity = script.card.capacityAmmo;
+                    int ammosInWeapon = Int32.Parse(script.ammosAmmount.text);
+                    int ammosNeeded = clipCapacity - ammosInWeapon;
+
+                    if(ammosNeeded >= ammosAvaliable)
+                    {
+                        script.ammosAmmount.text = (Int32.Parse(script.ammosAmmount.text) + Int32.Parse(inventory[ammosIndex].GetComponent<InventoryCardScript>().quantity.text)).ToString();
+                        inventory[ammosIndex].GetComponent<InventoryCardScript>().quantity.text = (Int32.Parse(inventory[ammosIndex].GetComponent<InventoryCardScript>().quantity.text) 
+                            - ammosNeeded).ToString();
+
+                        if(inventory[ammosIndex].GetComponent<InventoryCardScript>().quantity.text == "0")
+                        {
+                            inventory[ammosIndex].GetComponent<InventoryCardScript>().card = null;
+                            inventory[ammosIndex].GetComponent<InventoryCardScript>().Initialize();
+                        }
+                    }
+
+                    else
+                    {
+                        script.ammosAmmount.text = script.card.capacityAmmo.ToString();
+                        inventory[ammosIndex].GetComponent<InventoryCardScript>().quantity.text = (Int32.Parse(inventory[ammosIndex].GetComponent<InventoryCardScript>().quantity.text)
+                            - ammosNeeded).ToString();
+                    }
+
+                    
+                }
+            }
+            
+
+        }
+        return canReload;
+    }
+    public bool FireWeapon ()
+    {
+        if (!canFire())
+        {
+            return false;
+        }
+        foreach (GameObject item in inventory)
+        {
+            if (item.GetComponent<InventoryCardScript>().cardName.text == leonEquippedWeapon)
+            {
+                item.GetComponent<InventoryCardScript>().ammosAmmount.text = (Int32.Parse(item.GetComponent<InventoryCardScript>().ammosAmmount.text) -1 ).ToString();
+            }
+        }
+        return true;
+
+    }
+
+    public bool ThrowGrenade ()
+    {
+        if(leonEquippedGrenade == "")
+        {
+            return false;
+        }
+        foreach(GameObject item in inventory)
+        {
+            InventoryCardScript script = item.GetComponent<InventoryCardScript>();
+            if(script.cardName.text == leonEquippedGrenade)
+            {
+                script.card = null;
+                script.Initialize();
+            
+            }
+        }
+        leonEquippedGrenade = "";
+        equippedGrenade.SetText(leonEquippedGrenade);
+        return true;
+
+    }
+
+    public bool KeycardFound ()
+    {
+        bool keyItemFound = false;
+        foreach (GameObject item in inventory)
+        {
+            if(item.GetComponent<InventoryCardScript>().cardName.text == "Key Card")
+            {
+                item.GetComponent<InventoryCardScript>().card = null;
+                item.GetComponent<InventoryCardScript>().Initialize();
+                keyItemFound = true;
+                break;
+                
+            }
+        }
+        return keyItemFound;
+    }
+
+    public bool HeartKeyFound()
+    {
+        bool itemFound = false;
+        foreach (GameObject item in inventory)
+        {
+            if (item.GetComponent<InventoryCardScript>().cardName.text == "Heart Key")
+            {
+                item.GetComponent<InventoryCardScript>().card = null;
+                item.GetComponent<InventoryCardScript>().Initialize();
+                itemFound = true;
+                break;
+
+            }
+        }
+        return itemFound;
+    }
+
+    public bool ClubKeyFound()
+    {
+        bool itemFound = false;
+        foreach (GameObject item in inventory)
+        {
+            if (item.GetComponent<InventoryCardScript>().cardName.text == "Club Key")
+            {
+                item.GetComponent<InventoryCardScript>().card = null;
+                item.GetComponent<InventoryCardScript>().Initialize();
+                itemFound = true;
+                break;
+
+            }
+        }
+        return itemFound;
+    }
+
+    public bool SpadeKeyFound()
+    {
+        bool itemFound = false;
+        foreach (GameObject item in inventory)
+        {
+            if (item.GetComponent<InventoryCardScript>().cardName.text == "Spade Key")
+            {
+                item.GetComponent<InventoryCardScript>().card = null;
+                item.GetComponent<InventoryCardScript>().Initialize();
+                itemFound = true;
+                break;
+
+            }
+        }
+        return itemFound;
+    }
+
+    public bool DiamondKeyFound()
+    {
+        bool itemFound = false;
+        foreach (GameObject item in inventory)
+        {
+            if (item.GetComponent<InventoryCardScript>().cardName.text == "Diamond Key")
+            {
+                item.GetComponent<InventoryCardScript>().card = null;
+                item.GetComponent<InventoryCardScript>().Initialize();
+                itemFound = true;
+                break;
+
+            }
+        }
+        return itemFound;
+    }
+
+    public void DisableButtons ()
+    {
+        discard.interactable = false;
+        use.interactable = false;
+        combine.interactable = false;
+        equip.interactable = false;
+    }
+
+   
 }

@@ -9,10 +9,12 @@ public class Card : ScriptableObject
     public string cardName;
     public int quantity;
     public Sprite image;
-    public Button Use;
-    public Button Equip;
-    public Button Combine;
-    public Button Discard;
+    public int sellPrice;
+    public int buyPrice;
+    public int capacityAmmo;
+    public bool canSell = false;
+    public int ammos;
+
 
     
 
