@@ -11793,11 +11793,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1728434544555967091, guid: b745e57b75131614591c0e2997203159, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -81.28152
+      value: -81.281525
       objectReference: {fileID: 0}
     - target: {fileID: 2838289705047780292, guid: b745e57b75131614591c0e2997203159, type: 3}
       propertyPath: m_Name
       value: ShopCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475273207465630841, guid: b745e57b75131614591c0e2997203159, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475273207465630841, guid: b745e57b75131614591c0e2997203159, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475273207465630841, guid: b745e57b75131614591c0e2997203159, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7944735798858880364, guid: b745e57b75131614591c0e2997203159, type: 3}
       propertyPath: m_LocalPosition.x
