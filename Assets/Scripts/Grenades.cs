@@ -8,11 +8,13 @@ public class Grenades : MonoBehaviour
     // Start is called before the first frame update
     public float throwForce = 10f;
     public Transform grenadeArea;
-    public GameObject grenadePrefab;
+    public GameObject Flashgrenade;
+    public GameObject Handgrenade;
     public Animator anim;
-
+    public InventoryScript inventoryScript;
     private void Update()
     {
+       
         if (Input.GetKeyDown(KeyCode.G))
         {
             StartCoroutine(GrenadeAnim());
@@ -22,10 +24,32 @@ public class Grenades : MonoBehaviour
 
     void ThrowGrenade()
     {
-        GameObject grenade = Instantiate(grenadePrefab, grenadeArea.transform.position, grenadeArea.transform.rotation);
-        Rigidbody rb = grenade.GetComponent<Rigidbody>();
-        rb.AddForce(grenadeArea.transform.forward * throwForce, ForceMode.VelocityChange);
+        if (inventoryScript.leonEquippedGrenade !="")
+        {
+            if (inventoryScript.leonEquippedGrenade.Equals("Hand Gernade"))
+            {
+                Handgrenade.SetActive(true);
+                Flashgrenade.SetActive(false);
+                GameObject grenade = Instantiate(Handgrenade, grenadeArea.transform.position, grenadeArea.transform.rotation);
+                Rigidbody rb = grenade.GetComponent<Rigidbody>();
+                rb.AddForce(grenadeArea.transform.forward * throwForce, ForceMode.VelocityChange);
+            }
+            else if (inventoryScript.leonEquippedGrenade.Equals("Flash Gernade"))
+            {
+                Handgrenade.SetActive(false);
+                Flashgrenade.SetActive(true);
+                GameObject grenade = Instantiate(Flashgrenade, grenadeArea.transform.position, grenadeArea.transform.rotation);
+                Rigidbody rb = grenade.GetComponent<Rigidbody>();
+                rb.AddForce(grenadeArea.transform.forward * throwForce, ForceMode.VelocityChange);
+            }
 
+
+            
+        }
+        else
+        {
+            //sound effect that you donot have an equipped grenade
+        }
     }
     IEnumerator GrenadeAnim()
     {

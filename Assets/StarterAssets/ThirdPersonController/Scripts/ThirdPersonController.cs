@@ -110,7 +110,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
-
+        public InventoryScript inventoryScript;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -403,7 +403,8 @@ namespace StarterAssets
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.CompareTag("Item") && Input.GetKeyUp(KeyCode.E))
+            string tag = ChangeTagToItem(other);
+            if (tag == "Item" && Input.GetKeyUp(KeyCode.E))
             {
 
                 _animator.SetBool("Pick", true);
@@ -421,14 +422,34 @@ namespace StarterAssets
             Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f);
             foreach (Collider collider in colliders)
             {
-                if (collider.CompareTag("Item"))
+                bool canPick = inventoryScript.collectItem(collider.tag);
+                if (canPick)
                 {
-                    // Call DelayedAction and pass the Collider as a parameter
-                    DelayedAction(collider);
-                    break;
+                    string tag = ChangeTagToItem(collider);
+                    if (tag.Equals("Item"))
+                    {
+                        // Call DelayedAction and pass the Collider as a parameter
+                        DelayedAction(collider);
+                        break;
+                    }
                 }
             }
         }
+
+        public string ChangeTagToItem(Collider other)
+        {
+            if (other.CompareTag("Green Herb") || other.CompareTag("Red Herb") || other.CompareTag("Key Card") ||
+                 other.CompareTag("Heart Key") || other.CompareTag("Club Key") || other.CompareTag("Spade Key") ||
+                  other.CompareTag("Diamond Key") || other.CompareTag("Normal Gunpowder") || other.CompareTag("High-Grade Gunpowder") ||
+                   other.CompareTag("Emblem") || other.CompareTag("Ruby") || other.CompareTag("Emerald") ||
+                    other.CompareTag("Revolver"))
+
+            {
+                return "Item";
+            }
+            return other.tag;
+        }
+      
 
         private void DelayedAction(Collider other)
         {

@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Key Card
   quantity: 1
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: f6e14e3486a8d4341bbd4296fb0416a5, type: 3}
+  sellPrice: 0
+  buyPrice: 0
+  capacityAmmo: 0
+  canSell: 0
+  ammos: 0

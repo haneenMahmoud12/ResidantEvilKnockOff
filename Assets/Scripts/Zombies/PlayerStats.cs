@@ -9,6 +9,7 @@ public class PlayerStats : CharacterStats
     [SerializeField] private bool canAttack;*/
     public bool isGrappled;
     // Start is called before the first frame update
+   
     void Start()
     {
         InitVariables();
@@ -25,7 +26,7 @@ public class PlayerStats : CharacterStats
     }
     public override void InitVariables()
     {
-        maxHealth = 15;
+        maxHealth = 8;
         SetHealthTo(maxHealth);
         isDead = false;
         damage = 1;

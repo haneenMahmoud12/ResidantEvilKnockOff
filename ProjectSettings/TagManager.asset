@@ -3,7 +3,65 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CinemachineTarget
+  - handGrenade
+  - Zombie
+  - flashGrenade
+  - enemy
+  - VisitRoomZombie
+  - OfficeZombie
+  - Gun
+  - DiningRoomZombie
+  - DayLightRoomZombie
+  - Item
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - Ruby
+  - Green Herb
+  - Red Herb
+  - Emerald
+  - Club Key
+  - Diamond Key
+  - Spade Key
+  - Gold Bar
+  - Emblem
+  - Normal Gunpowder
+  - High-Grade Gunpowder
+  - Hand Gernade
+  - Flash Grenade
+  - Revolver
+  - RevolverDoor
+  - DoorKeyCard
+  - DoorEmblem
+  - DoorSpade
+  - DoorHeart
   layers:
   - Default
   - TransparentFX

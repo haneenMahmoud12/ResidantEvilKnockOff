@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using StarterAssets;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class ThirdpShoot : MonoBehaviour
 {
@@ -13,7 +14,13 @@ public class ThirdpShoot : MonoBehaviour
     [SerializeField] private LayerMask aimColliderLayerMask=new LayerMask();
   //  [SerializeField] private Transform debugTransform;
     [SerializeField] private Transform vfxHitGreen;
-    [SerializeField] private Transform vfxHitRed;
+    
+    public string weapontag;
+    //weapons 
+    public GameObject Shotgun;
+    public GameObject Rifle;
+    public GameObject Revolver;
+    public GameObject pistol;
     
     public Gun weapon;
     public ParticleSystem hiteffect;
@@ -23,15 +30,16 @@ public class ThirdpShoot : MonoBehaviour
     private StarterAssetsInputs starterAssetsInputs;
     private ThirdPersonController thirdPersonController;
     private Animator animator;
+    public InventoryScript inventoryScript;
 
     private void Awake()
     {
         starterAssetsInputs=GetComponent<StarterAssetsInputs>();
         thirdPersonController=GetComponent<ThirdPersonController>();
         animator=GetComponent<Animator>();
-        if (FindAnyObjectByType<Gun>()!=null)
-        weapon = FindAnyObjectByType<Gun>();
-
+       // if (FindAnyObjectByType<Gun>()!=null)
+       // weapon = FindAnyObjectByType<Gun>();
+        
 
         // inventory = GetComponent<Inventory>();
         // manager = GetComponent<EquipmentManager>();
@@ -46,7 +54,47 @@ public class ThirdpShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            inventoryScript.OpenInventory();
+        }
+        weapontag = inventoryScript.leonEquippedWeapon;
+        if (weapontag.Equals("Rifle"))
+        {
 
+            Shotgun.SetActive(false);
+            Rifle.SetActive(true);
+            pistol.SetActive(false);
+            Revolver.SetActive(false);
+             weapon = FindAnyObjectByType<Gun>();
+        }
+        if (weapontag.Equals("Shotgun"))
+        {
+
+            Shotgun.SetActive(true);
+            Rifle.SetActive(false);
+            pistol.SetActive(false);
+            Revolver.SetActive(false);
+            weapon = FindAnyObjectByType<Gun>();
+        }
+        if (weapontag.Equals("Revolver"))
+        {
+
+            Shotgun.SetActive(false);
+            Rifle.SetActive(false);
+            pistol.SetActive(false);
+            Revolver.SetActive(true);
+            weapon = FindAnyObjectByType<Gun>();
+        }
+        if (weapontag.Equals("Pistol"))
+        {
+
+            Shotgun.SetActive(false);
+            Rifle.SetActive(false);
+            pistol.SetActive(true);
+            Revolver.SetActive(false);
+            weapon = FindAnyObjectByType<Gun>();
+        }
 
         Vector3 mouseWorldPosition = Vector3.zero;
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
@@ -79,46 +127,51 @@ public class ThirdpShoot : MonoBehaviour
             pi.actions.FindAction("Sprint").Disable();
 
             //Shoot
-
-            if (starterAssetsInputs.shoot && !weapon.gunData.Automatic)
+            //removed-> starterAssetsInputs.shoot
+            if (Input.GetKey(KeyCode.B) && !weapon.gunData.Automatic)
             {
-                weapon.Shoot();
-                //if (weapon.CanShoot())
-                //{
-                //    Debug.Log("canshoot");
-                //    if (Physics.Raycast(ray, out RaycastHit hitInfo, weapon.gunData.maxDistance, aimColliderLayerMask))
-                //    {
-                //        weapon.Shoot();
-                //        hiteffect.transform.position = raycastHit.point;
-                //        hiteffect.transform.forward = raycastHit.normal;
-                //        hiteffect.Emit(1);
-                //        Debug.Log(hitInfo.transform.name);
-                //    }
-                //    weapon.gunData.currentAmmo--;
-                //    weapon.timeSinceLastShot = 0;
-                //    weapon.timeSinceLastShot += Time.deltaTime;
-                //    //  weapon.OnGunShot();
-                //}
-                //if (hitTransform != null)
-                //{
-                //    if (hitTransform.GetComponent<BulletTarget>() != null)
-                //    {
-                //        Instantiate(vfxHitGreen, hitTransform.position, Quaternion.identity);
-                //    }
-                //    else
-                //    {
-                //        Instantiate(vfxHitRed, hitTransform.position, Quaternion.identity);
-                //    }
-                //}
+                
+                    weapon.Shoot();
+                    //if (weapon.CanShoot())
+                    //{
+                    //    Debug.Log("canshoot");
+                    //    if (Physics.Raycast(ray, out RaycastHit hitInfo, weapon.gunData.maxDistance, aimColliderLayerMask))
+                    //    {
+                    //        weapon.Shoot();
+                    //        hiteffect.transform.position = raycastHit.point;
+                    //        hiteffect.transform.forward = raycastHit.normal;
+                    //        hiteffect.Emit(1);
+                    //        Debug.Log(hitInfo.transform.name);
+                    //    }
+                    //    weapon.gunData.currentAmmo--;
+                    //    weapon.timeSinceLastShot = 0;
+                    //    weapon.timeSinceLastShot += Time.deltaTime;
+                    //    //  weapon.OnGunShot();
+                    //}
+                    //if (hitTransform != null)
+                    //{
+                    //    if (hitTransform.GetComponent<BulletTarget>() != null)
+                    //    {
+                    //        Instantiate(vfxHitGreen, hitTransform.position, Quaternion.identity);
+                    //    }
+                    //    else
+                    //    {
+                    //        Instantiate(vfxHitRed, hitTransform.position, Quaternion.identity);
+                    //    }
+                    //}
 
-                starterAssetsInputs.shoot = false;
+                    starterAssetsInputs.shoot = false;
+                
 
             }
-           // while (Input.GetKey(KeyCode.Mouse0) && weapon.gunData.Automatic)
-            if (Input.GetKey(KeyCode.B) && weapon.gunData.Automatic)
-            {
-                // Space key is being held down
-               weapon.ShootAuto();
+            // while (Input.GetKey(KeyCode.Mouse0) && weapon.gunData.Automatic)
+
+            if ((Input.GetKey(KeyCode.B) && weapon.gunData.Automatic))
+                {
+               
+                    // Space key is being held down
+                    weapon.ShootAuto();
+                
             }
 
 
@@ -137,9 +190,14 @@ public class ThirdpShoot : MonoBehaviour
 
 
 
-      
-        
+        if (starterAssetsInputs.reload)
+        {
+            if (inventoryScript.ReloadWeapon()) {
+                weapon.StartReload();
+            }
+        }
 
 
     }
+    
 }
