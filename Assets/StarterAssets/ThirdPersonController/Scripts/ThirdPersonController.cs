@@ -438,8 +438,8 @@ namespace StarterAssets
 
         public string ChangeTagToItem(Collider other)
         {
-            if (other.CompareTag("Green Herb") || other.CompareTag("Red Herb") || other.CompareTag("Key Card") ||
-                 other.CompareTag("Heart Key") || other.CompareTag("Club Key") || other.CompareTag("Spade Key") ||
+            if (other.CompareTag("Green Herb") || other.CompareTag("Red Herb") 
+                  || other.CompareTag("Club Key") || other.CompareTag("Spade Key") ||
                   other.CompareTag("Diamond Key") || other.CompareTag("Normal Gunpowder") || other.CompareTag("High-Grade Gunpowder") ||
                    other.CompareTag("Emblem") || other.CompareTag("Ruby") || other.CompareTag("Emerald") ||
                     other.CompareTag("Revolver"))

@@ -62,6 +62,8 @@ TagManager:
   - DoorEmblem
   - DoorSpade
   - DoorHeart
+  - Door
+  - DoorDiamond
   layers:
   - Default
   - TransparentFX

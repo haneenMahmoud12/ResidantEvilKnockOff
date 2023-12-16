@@ -199,5 +199,13 @@ public class ThirdpShoot : MonoBehaviour
 
 
     }
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Door")&& Input.GetKey(KeyCode.E))
+        {
+            Animator animator = other.GetComponent<Animator>();
+            animator.SetBool("unlock", true);
+        }
+    }
+
 }

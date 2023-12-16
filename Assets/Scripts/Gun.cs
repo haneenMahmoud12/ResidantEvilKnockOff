@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
-
+using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Gun : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Gun : MonoBehaviour
     public Transform SpawnBullet;
     public InventoryScript inventoryScript;
     public Animator animator;
+    public TMP_Text t;
     // [SerializeField] private Transform debugTransform;
 
     //[SerializeField] private Transform cam;
@@ -71,6 +73,8 @@ public class Gun : MonoBehaviour
         {
             if (inventoryScript.FireWeapon())
             {
+                //AMMO COUNT ANCHORED TO WEAPON///////////////////////////////////
+              //  t.text = inventoryScript.;
                 muzleFlash.Emit(1);
 
                 // Debug.Log("canshoot");
