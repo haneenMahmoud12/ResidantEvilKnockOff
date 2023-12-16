@@ -43,7 +43,7 @@ public class Grenade1 : MonoBehaviour
             {
                 if (gameObject.tag == "handGrenade")
                 {
-                    Debug.Log("hi");
+                    //Debug.Log("hi");
                     obj.TakeDamage(giveDamage);
                     
                 }
