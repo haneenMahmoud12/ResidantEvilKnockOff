@@ -646,6 +646,7 @@ public class InventoryScript : MonoBehaviour
         }
         return canReload;
     }
+
     public bool FireWeapon ()
     {
         if (!canFire())
@@ -662,6 +663,20 @@ public class InventoryScript : MonoBehaviour
         return true;
 
     }
+
+    public string GetAmmoCount()
+    {
+        string ammos = "";
+        foreach (GameObject item in inventory)
+        {
+            if (item.GetComponent<InventoryCardScript>().cardName.text == leonEquippedWeapon)
+            {
+                ammos = item.GetComponent<InventoryCardScript>().ammosAmmount.text;
+            }
+        }
+        return ammos;
+    }
+
 
     public bool ThrowGrenade ()
     {
@@ -759,6 +774,24 @@ public class InventoryScript : MonoBehaviour
         foreach (GameObject item in inventory)
         {
             if (item.GetComponent<InventoryCardScript>().cardName.text == "Diamond Key")
+            {
+                item.GetComponent<InventoryCardScript>().card = null;
+                item.GetComponent<InventoryCardScript>().Initialize();
+                itemFound = true;
+                break;
+
+            }
+        }
+        return itemFound;
+    }
+
+
+    public bool EmblemFound()
+    {
+        bool itemFound = false;
+        foreach (GameObject item in inventory)
+        {
+            if (item.GetComponent<InventoryCardScript>().cardName.text == "Emblem")
             {
                 item.GetComponent<InventoryCardScript>().card = null;
                 item.GetComponent<InventoryCardScript>().Initialize();

@@ -24,8 +24,7 @@ public class Grenades : MonoBehaviour
 
     void ThrowGrenade()
     {
-        if (inventoryScript.leonEquippedGrenade !="")
-        {
+        
             if (inventoryScript.leonEquippedGrenade.Equals("Hand Gernade"))
             {
                 Handgrenade.SetActive(true);
@@ -33,6 +32,7 @@ public class Grenades : MonoBehaviour
                 GameObject grenade = Instantiate(Handgrenade, grenadeArea.transform.position, grenadeArea.transform.rotation);
                 Rigidbody rb = grenade.GetComponent<Rigidbody>();
                 rb.AddForce(grenadeArea.transform.forward * throwForce, ForceMode.VelocityChange);
+                inventoryScript.ThrowGrenade();
             }
             else if (inventoryScript.leonEquippedGrenade.Equals("Flash Gernade"))
             {
@@ -41,23 +41,27 @@ public class Grenades : MonoBehaviour
                 GameObject grenade = Instantiate(Flashgrenade, grenadeArea.transform.position, grenadeArea.transform.rotation);
                 Rigidbody rb = grenade.GetComponent<Rigidbody>();
                 rb.AddForce(grenadeArea.transform.forward * throwForce, ForceMode.VelocityChange);
+                inventoryScript.ThrowGrenade();
             }
 
 
             
+        
+    }
+    IEnumerator GrenadeAnim()
+    {
+        if (inventoryScript.leonEquippedGrenade != "")
+        {
+            anim.SetBool("isThrowing", true);
+        yield return new WaitForSeconds(0.8f);
+        ThrowGrenade();
+        anim.SetBool("isThrowing", false);
+        yield return new WaitForSeconds(1f);
         }
         else
         {
             //sound effect that you donot have an equipped grenade
         }
-    }
-    IEnumerator GrenadeAnim()
-    {
-        anim.SetBool("isThrowing", true);
-        yield return new WaitForSeconds(0.8f);
-        ThrowGrenade();
-        anim.SetBool("isThrowing", false);
-        yield return new WaitForSeconds(1f);
 
     }
 }

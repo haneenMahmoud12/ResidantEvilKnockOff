@@ -199,13 +199,70 @@ public class ThirdpShoot : MonoBehaviour
 
 
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.CompareTag("Door")&& Input.GetKey(KeyCode.E))
+
+        if (other.CompareTag("Door") && Input.GetKey(KeyCode.E))
         {
-            Animator animator = other.GetComponent<Animator>();
-            animator.SetBool("unlock", true);
+            Animator dooranim = other.GetComponent<Animator>();
+            dooranim.SetBool("unlock", true);
+        }
+        if (other.CompareTag("DoorDiamond") && Input.GetKey(KeyCode.E))
+        {
+            if (inventoryScript.DiamondKeyFound())
+            {
+                Animator dooranim = other.GetComponent<Animator>();
+                dooranim.SetBool("unlock", true);
+            }
+            else
+            {
+                Debug.Log("DOOR CANNOT OPEN WITHOUT KEY");
+            }
+
+        }
+        if (other.CompareTag("DoorSpade") && Input.GetKey(KeyCode.E))
+        {
+            if (inventoryScript.SpadeKeyFound())
+            {
+                Animator dooranim = other.GetComponent<Animator>();
+                dooranim.SetBool("unlock", true);
+            }
+            else
+            {
+                Debug.Log(" spadeDOOR CANNOT OPEN WITHOUT KEY");
+            }
+            
+
+            }
+        if (other.CompareTag("DoorEmblem") && Input.GetKey(KeyCode.E))
+        {
+            if (inventoryScript.EmblemFound())
+            {
+                Animator dooranim = other.GetComponent<Animator>();
+                dooranim.SetBool("unlock", true);
+            }
+            else
+            {
+                Debug.Log("DoorEmblem CANNOT OPEN WITHOUT KEY");
+            }
+
+
+        }
+        if (other.CompareTag("DoorKeyCard") && Input.GetKey(KeyCode.E))
+        {
+            if (inventoryScript.KeycardFound())
+            {
+                Animator dooranim = other.GetComponent<Animator>();
+                dooranim.SetBool("unlock", true);
+            }
+            else
+            {
+                Debug.Log(" DoorKeyCard CANNOT OPEN WITHOUT KEY");
+            }
+
+
         }
     }
+    
 
 }
