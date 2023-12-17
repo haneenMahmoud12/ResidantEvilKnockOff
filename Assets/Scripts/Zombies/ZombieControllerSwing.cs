@@ -143,8 +143,8 @@ public class ZombieContollerSwing : MonoBehaviour
 
     private void RotateToTarget()
     {
-        agent.transform.forward = target.position;
-        // transform.LookAt(target);
+        //agent.transform.forward = target.position;
+        transform.LookAt(target);
         /*Vector3 direction = target.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = rotation;*/
@@ -154,7 +154,7 @@ public class ZombieContollerSwing : MonoBehaviour
     {
         if (!playerStats.isDead)
         {
-            //RotateToTarget();
+            RotateToTarget();
             anim.SetTrigger("Attack");
             stats.damage = 2;
             if (!playerStats.isGrappled)

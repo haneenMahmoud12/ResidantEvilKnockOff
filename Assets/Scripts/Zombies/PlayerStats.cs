@@ -8,6 +8,8 @@ public class PlayerStats : CharacterStats
     /*[SerializeField] private float attackSpeed;
     [SerializeField] private bool canAttack;*/
     public bool isGrappled;
+    public bool isInvincible;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,10 +34,32 @@ public class PlayerStats : CharacterStats
         /*attackSpeed = 1.5f;
         canAttack = true;*/
         isGrappled = false;
+        isInvincible = false;
     }
 
     public void DealDamage(CharacterStats stats)
     {
         stats.TakeDamage(damage);
+    }
+
+    public void HealCheat()
+    {
+        health += 4; 
+    }
+    public void InvincibilityCheat()
+    {
+        isInvincible = true;
+    }
+    public void SloMoCheat()
+    {
+       //health += 4;
+    }
+    public void GoldCheat()
+    {
+        health += 4;
+    }
+    public void DoorCheat()
+    {
+        health += 4;
     }
 }

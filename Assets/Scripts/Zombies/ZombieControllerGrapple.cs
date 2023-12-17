@@ -13,6 +13,7 @@ public class ZombieContollerGrapple : MonoBehaviour
     private bool playerNear = false;
     private PlayerStats playerStats;
     [SerializeField] Transform target;
+    [SerializeField] Animator playerAnim;
 
     void Start()
     {
@@ -131,7 +132,8 @@ public class ZombieContollerGrapple : MonoBehaviour
             {
                 timeOfLastAttack = Time.time;
                 AttackTarget(playerStats);
-                Invoke(nameof(NotGrappled), 4);
+                //Invoke(nameof(NotGrappled), 4);
+                StartCoroutine(NotGrappled());
             }
         }
         else
@@ -145,8 +147,8 @@ public class ZombieContollerGrapple : MonoBehaviour
 
     private void RotateToTarget()
     {
-        agent.transform.forward = -target.position;
-        //transform.LookAt(target);
+        //agent.transform.forward = -target.position;
+        transform.LookAt(target);
        /* Vector3 direction = target.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = rotation;*/
@@ -160,13 +162,17 @@ public class ZombieContollerGrapple : MonoBehaviour
             anim.SetTrigger("Attack");
             anim.SetBool("Grapple",true);
             playerStats.isGrappled = true;
+            playerAnim.SetBool("isGrappled", true);
             stats.damage = 5;
             stats.DealDamage(playerStats);
         }
     }
-    private void NotGrappled()
+    private IEnumerator NotGrappled()
     {
+        yield return new WaitForSeconds(4);
         playerStats.isGrappled = false;
         anim.SetBool("Grapple", false);
+        playerAnim.SetBool("isGrappled", false);
+        playerAnim.SetTrigger("StabTrig");
     }
 }

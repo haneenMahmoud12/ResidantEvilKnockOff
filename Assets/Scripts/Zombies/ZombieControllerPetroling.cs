@@ -156,16 +156,17 @@ public class ZombieContollerPetroling : MonoBehaviour
 
     private void RotateToTarget()
     {
-        // transform.LookAt(target);
-        Vector3 direction = target.position - transform.position;
+        transform.LookAt(target);
+        /*Vector3 direction = target.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-        transform.rotation = rotation;
+        transform.rotation = rotation;*/
     }
 
     private void AttackTarget(PlayerStats playerStats)
     {
         if (!playerStats.isDead)
         {
+            RotateToTarget();
             anim.SetTrigger("Attack");
             stats.damage = 2;
             if (!playerStats.isGrappled)
