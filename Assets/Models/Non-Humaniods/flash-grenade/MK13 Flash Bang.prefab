@@ -121,9 +121,10 @@ MonoBehaviour:
   grenadeTimer: 3
   radius: 15
   giveDamage: 4
-  explosionEffect: {fileID: 1329845292236604, guid: 5f7ad62c5f2fbe043afcc693ba22c924, type: 3}
+  explosionEffect: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c, type: 3}
   buyPrice: 15
   sellPrice: 10
+  sharpnelsEffect: {fileID: 1025285306637258, guid: d8f0099df63275647a8bcf646df1ca00, type: 3}
 --- !u!65 &-498685634939228678
 BoxCollider:
   m_ObjectHideFlags: 0

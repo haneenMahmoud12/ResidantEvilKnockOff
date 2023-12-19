@@ -822,10 +822,12 @@ public class InventoryScript : MonoBehaviour
             starterAssetsInputs = player.GetComponent<StarterAssetsInputs>();
         }
         Time.timeScale = 0;
-        starterAssetsInputs.cursorLocked = false;
+
+        //   starterAssetsInputs.cursorLocked = false;
+       
         Cursor.lockState = CursorLockMode.None;
 
-        thirdPersonController.LockCameraPosition = true;
+        //thirdPersonController.LockCameraPosition = true;
         inventoryCanvas.SetActive(true);
     }
 
@@ -834,9 +836,11 @@ public class InventoryScript : MonoBehaviour
         Time.timeScale = 1;
         inventoryCanvas.SetActive(false);
         craftingCanvas.SetActive(false);
-        thirdPersonController.LockCameraPosition = false;
-/*        starterAssetsInputs.cursorLocked = true;
-*/    }
+        //Cursor.lockState = CursorLockMode.Locked;
+        // thirdPersonController.LockCameraPosition = false;
+        /*        starterAssetsInputs.cursorLocked = true;
+        */
+    }
 
 
 }

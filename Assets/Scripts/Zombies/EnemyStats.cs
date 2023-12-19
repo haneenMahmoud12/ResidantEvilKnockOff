@@ -13,10 +13,10 @@ public class EnemyStats : CharacterStats
     public GameObject Coins;
     public Transform Transform;
     public int goldAmount=0;
-    public Gold gold;
+     Gold gold;
     public bool isHit=false;
 
-    public Animator anim;
+     Animator anim;
     public bool isEnemyKnockedDown = false;
     public HealthBar healthBar;
 
@@ -24,17 +24,19 @@ public class EnemyStats : CharacterStats
     {
         InitVariables();
         healthBar.SetMaxHealth(maxHealth);
+        anim = GetComponent<Animator>();
+
     }
 
-    public override void TakeDamage(int damage)
+public override void TakeDamage(int damage)
     {
         if (health > 0)
         {
             health = health - damage;
-            //Debug.Log(health);
+            Debug.Log(health);
             healthBar.SetHealth(health);
         }
-        if (health == 0)
+        if (health <= 0)
             Die();
     }
 
@@ -52,6 +54,23 @@ public class EnemyStats : CharacterStats
         isEnemyKnockedDown = false;
         anim.SetBool("isKnockedDown", false);
     }
+
+
+    public void hit()
+    {
+        StartCoroutine(hitAnim());
+    }
+
+
+    IEnumerator hitAnim()
+    {
+      
+        anim.SetBool("weapon hit", true);
+        yield return new WaitForSeconds(2f);
+
+        anim.SetBool("weapon hit", false);
+    }
+
     public override void CheckHealth()
     {
         if (health <= 0)

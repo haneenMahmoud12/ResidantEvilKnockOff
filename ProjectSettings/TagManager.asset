@@ -64,6 +64,8 @@ TagManager:
   - DoorHeart
   - Door
   - DoorDiamond
+  - KeyCard
+  - dinningzombie1
   layers:
   - Default
   - TransparentFX

@@ -35,7 +35,7 @@ public class PlayerStats : CharacterStats
         isGrappled = false;
     }
 
-    public void DealDamage(CharacterStats stats)
+    public void DealDamage(EnemyStats stats)
     {
         stats.TakeDamage(damage);
     }

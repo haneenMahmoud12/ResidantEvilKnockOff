@@ -6,13 +6,13 @@ public class Grenade1 : MonoBehaviour
 {
     public float grenadeTimer = 3f;
     float countDown;
-    public float radius = 5f;
+    public float radius = 3f;
     public int giveDamage = 4;
     public GameObject explosionEffect;
     public int buyPrice = 15;
     public int sellPrice = 10;
     bool hasExploded = false;
-    
+    public GameObject sharpnelsEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +33,7 @@ public class Grenade1 : MonoBehaviour
 
     void Explode()
     {
-        Instantiate(explosionEffect, transform.position, transform.rotation);
+        
 
         
 
@@ -45,13 +45,13 @@ public class Grenade1 : MonoBehaviour
             {
                 if (gameObject.tag == "handGrenade")
                 {
-                    //Debug.Log("hi");
+                    Instantiate(sharpnelsEffect, transform.position, transform.rotation);
                     obj.TakeDamage(giveDamage);
                     
                 }
                 if (gameObject.tag == "flashGrenade")
                 {
-                 
+                    Instantiate(explosionEffect, transform.position, transform.rotation);
 
                     obj.objectKnockedDown();
 

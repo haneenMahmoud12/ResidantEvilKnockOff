@@ -21,16 +21,16 @@ public class ThirdpShoot : MonoBehaviour
     public GameObject Rifle;
     public GameObject Revolver;
     public GameObject pistol;
+    public GameObject knife;
     
     public Gun weapon;
     public ParticleSystem hiteffect;
 
-    //private Inventory inventory;
-    //private EquipmentManager manager;
     private StarterAssetsInputs starterAssetsInputs;
     private ThirdPersonController thirdPersonController;
     private Animator animator;
     public InventoryScript inventoryScript;
+    public Grenades grenadesScript;
 
     private void Awake()
     {
@@ -41,8 +41,7 @@ public class ThirdpShoot : MonoBehaviour
        // weapon = FindAnyObjectByType<Gun>();
         
 
-        // inventory = GetComponent<Inventory>();
-        // manager = GetComponent<EquipmentManager>();
+      
 
     }
    
@@ -51,7 +50,7 @@ public class ThirdpShoot : MonoBehaviour
       
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -66,6 +65,7 @@ public class ThirdpShoot : MonoBehaviour
             Rifle.SetActive(true);
             pistol.SetActive(false);
             Revolver.SetActive(false);
+            knife.SetActive(false);
              weapon = FindAnyObjectByType<Gun>();
         }
         if (weapontag.Equals("Shotgun"))
@@ -75,24 +75,27 @@ public class ThirdpShoot : MonoBehaviour
             Rifle.SetActive(false);
             pistol.SetActive(false);
             Revolver.SetActive(false);
+            knife.SetActive(false);
             weapon = FindAnyObjectByType<Gun>();
         }
-        if (weapontag.Equals("Revolver"))
+        if (weapontag.Equals("Revolver") )
         {
 
             Shotgun.SetActive(false);
             Rifle.SetActive(false);
             pistol.SetActive(false);
             Revolver.SetActive(true);
+            knife.SetActive(false);
             weapon = FindAnyObjectByType<Gun>();
         }
-        if (weapontag.Equals("Pistol"))
+        if (weapontag.Equals("Pistol") )
         {
 
             Shotgun.SetActive(false);
             Rifle.SetActive(false);
             pistol.SetActive(true);
             Revolver.SetActive(false);
+            knife.SetActive(false);
             weapon = FindAnyObjectByType<Gun>();
         }
 
@@ -111,7 +114,7 @@ public class ThirdpShoot : MonoBehaviour
 
         //Aim
 
-        if (starterAssetsInputs.aim)
+        if (starterAssetsInputs.aim && inventoryScript.leonEquippedWeapon != "" && inventoryScript.leonEquippedGrenade == "")
         {
             aimVirtualCamera.gameObject.SetActive(true);
             thirdPersonController.SetSensitivity(aimSensitivity);
@@ -122,13 +125,13 @@ public class ThirdpShoot : MonoBehaviour
             worldAimTarget.y = transform.position.y;
             Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
 
-            transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+            transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 60f);
             PlayerInput pi = GetComponent<PlayerInput>();
             pi.actions.FindAction("Sprint").Disable();
 
             //Shoot
             //removed-> starterAssetsInputs.shoot
-            if (Input.GetKey(KeyCode.B) && !weapon.gunData.Automatic)
+            if (Input.GetKey(KeyCode.B) && !weapon.gunData.Automatic && inventoryScript.leonEquippedGrenade == "")
             {
                 
                     weapon.Shoot();
@@ -258,6 +261,21 @@ public class ThirdpShoot : MonoBehaviour
             else
             {
                 Debug.Log(" DoorKeyCard CANNOT OPEN WITHOUT KEY");
+            }
+
+
+        }
+        if (other.CompareTag("DoorEmblem") && Input.GetKey(KeyCode.E))
+        {
+            if (inventoryScript.EmblemFound())
+            {
+                Animator dooranim = other.GetComponent<Animator>();
+                dooranim.SetBool("unlock", true);
+                Debug.Log("Congrats u escaped the zombies");
+            }
+            else
+            {
+                Debug.Log(" Emblem CANNOT OPEN WITHOUT KEY");
             }
 
 

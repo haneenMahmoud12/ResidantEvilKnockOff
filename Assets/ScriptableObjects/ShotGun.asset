@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: ShotGun
   damage: 3
-  maxDistance: 25
-  currentAmmo: 500
-  magSize: 8
+  maxDistance: 5
   fireRate: 120
   reloadTime: 1.5
   reloading: 0
