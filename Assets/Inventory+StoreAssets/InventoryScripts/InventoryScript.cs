@@ -221,10 +221,9 @@ public class InventoryScript : MonoBehaviour
     }
     public void collectGold(int goldAmmount)
     {
+        Debug.Log("inventoryScript  " + goldAmmount);
         leonGold += goldAmmount;
         gold.SetText((Int32.Parse(gold.text)+goldAmmount).ToString());
-
-
     }
 
     public bool UseGold(int goldAmmount)
@@ -278,9 +277,6 @@ public class InventoryScript : MonoBehaviour
         return false;
         
     }
-
-   
-
     public void RestoreKniefDurability()
     {
         leonKniefDurability = 10;
@@ -786,7 +782,6 @@ public class InventoryScript : MonoBehaviour
         }
         return itemFound;
     }
-
 
     public bool EmblemFound()
     {

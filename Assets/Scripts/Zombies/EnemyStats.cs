@@ -13,7 +13,7 @@ public class EnemyStats : CharacterStats
     public GameObject Coins;
     public Transform Transform;
     public int goldAmount=0;
-    public Gold gold;
+    private Gold gold;
     public bool isHit=false;
 
     public Animator anim;
@@ -87,29 +87,31 @@ public class EnemyStats : CharacterStats
         killZombie = true;
         base.Die();
         Destroy(gameObject,5);
-        DropCoins();
         var rnd = new System.Random();
         goldAmount = rnd.Next(5, 50);
-        gold.goldAmount = goldAmount;
+        DropCoins(goldAmount);
+        //inventoryScript.collectGold(goldAmount);
         health = 0;
         healthBar.SetHealth(0);
     }
-    private void DropCoins()
+    private void DropCoins(int amount)
     {
         Vector3 position = transform.position;
-        GameObject coin = Instantiate(Coins, position, Quaternion.identity);
-        coin.SetActive(true);
+        Instantiate(Coins, position, Quaternion.identity);
+        gold = Coins.GetComponent<Gold>();
+        gold.goldAmount = amount;
+        Debug.Log("EnenmyStats "+gold.goldAmount);
+        //coin.SetActive(true);
     }
     public override void InitVariables() 
     {
-        maxHealth = 5;
+        maxHealth = 4;
         SetHealthTo(maxHealth);
         isDead = false;
         damage = 1;
         attackSpeed = 3f;
         canAttack = true;
         killZombie = false;
-        gold = Coins.GetComponent<Gold>();
     }
 
     public void DealDamage(CharacterStats stats)

@@ -32,6 +32,7 @@ TagManager:
   - DoorEmblem
   - Spade Key
   - Diamond Key
+  - Gold Bar
   layers:
   - Default
   - TransparentFX

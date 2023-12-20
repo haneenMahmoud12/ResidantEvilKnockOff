@@ -403,7 +403,7 @@ namespace StarterAssets
 
         private void OnTriggerStay(Collider other)
         {
-            string tag = ChangeTagToItem(other);
+            //string tag = ChangeTagToItem(other);
             if (((other.CompareTag("Green Herb") || other.CompareTag("Red Herb")
                   || other.CompareTag("Club Key") || other.CompareTag("Spade Key") ||
                   other.CompareTag("Diamond Key") || other.CompareTag("Normal Gunpowder") || other.CompareTag("High-Grade Gunpowder") ||
@@ -420,7 +420,18 @@ namespace StarterAssets
                     Invoke("DelayedActionWrapper", 0.7f);
                 }
             }
+
+            else if (other.CompareTag("Gold Bar") && Input.GetKeyDown(KeyCode.E))
+            {
+                Gold gold = other.GetComponent<Gold>();
+                _animator.SetBool("Pick", true);
+
+                inventoryScript.collectGold(gold.goldAmount);
+                Invoke("DelayedActionWrapper", 0.7f);
+                Debug.Log("thirdPersonController "+gold.goldAmount);
+            }
         }
+
 
         // This method serves as a wrapper to call DelayedAction with the necessary parameters
         private void DelayedActionWrapper()
@@ -447,7 +458,7 @@ namespace StarterAssets
                   || other.CompareTag("Club Key") || other.CompareTag("Spade Key") ||
                   other.CompareTag("Diamond Key") || other.CompareTag("Normal Gunpowder") || other.CompareTag("High-Grade Gunpowder") ||
                    other.CompareTag("Emblem") || other.CompareTag("Ruby") || other.CompareTag("Emerald") || other.CompareTag("KeyCard") ||
-                    other.CompareTag("Revolver"))
+                    other.CompareTag("Revolver") || other.CompareTag("Gold Bar"))
 
             {
                 return "Item";
