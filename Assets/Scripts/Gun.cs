@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
-
+using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Gun : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class Gun : MonoBehaviour
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     public Transform pfBullet;
     public Transform SpawnBullet;
-   // [SerializeField] private Transform debugTransform;
+    public InventoryScript inventoryScript;
+    public Animator animator;
+    public TMP_Text t;
+    // [SerializeField] private Transform debugTransform;
 
     //[SerializeField] private Transform cam;
 
@@ -29,6 +33,7 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
+        
         gunData.reloading = false;
 
     }
@@ -49,80 +54,29 @@ public class Gun : MonoBehaviour
     public IEnumerator Reload()
     {
         gunData.reloading = true;
-
+        animator.SetBool("reload", true);
         yield return new WaitForSeconds(gunData.reloadTime);
 
-        gunData.currentAmmo = gunData.magSize;
+        //gunData.currentAmmo = gunData.magSize;
+        //  ANIMATION FOR RELOADING GUN 
+
 
         gunData.reloading = false;
     }
 
-    public bool CanShoot() => !gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f) && gunData.currentAmmo>0;
+    public bool CanShoot() => !gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f);
 
     public void Shoot()
     {
 
         if (CanShoot())
         {
-            muzleFlash.Emit(1);
-            // Debug.Log("canshoot");
-            Transform hitTransform = null;
-            Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
-            Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, gunData.maxDistance, aimColliderLayerMask))
-            {  // debugTransform.position = hitInfo.point;
-               // hitTransform = hitInfo.transform;
-               // ray.origin = hitInfo.point;
-               //  Debug.DrawLine(ray.origin, hitInfo.point,Color.red,2.0f);
-                Instantiate(vfxHitGreen, hitInfo.point, Quaternion.identity);
-                //EnemyStats enemy = hitInfo.transform.GetComponent<EnemyStats>();
-                //if (enemy != null)
-                //    Debug.Log("hi" + enemy.tag);
-                //EnemyStats enemy1 = hitInfo.collider.transform.GetComponent<EnemyStats>();
-                //if (enemy1 != null)
-                //    Debug.Log("hello" + enemy1.tag);
-                Vector3 aimDir = (hitInfo.point - SpawnBullet.position).normalized;
-
-                Instantiate(pfBullet, SpawnBullet.position, Quaternion.LookRotation(aimDir, Vector3.up));
-                BulletProjectile bullet = pfBullet.GetComponent<BulletProjectile>();
-
-                bullet.damage = gunData.damage;
-                bullet.speed = gunData.maxDistance;
-
-                // string hitTag = hitInfo.collider.gameObject.tag;
-                // Debug.Log(hitTag);
-                // Debug.Log(hitInfo.transform.tag);
-                // var hitBox=hitInfo.collider.GetComponent<EnemyStats>();
-                // if (hitBox != null)
-                {
-                    // Debug.Log(hitBox.transform.tag);
-                    //    hitBox.TakeDamage(gunData.damage);
-                }
-                // EnemyStats enemy = hitInfo.transform.GetComponent<EnemyStats>();
-                //  if(enemy != null) {
-                //    Debug.Log("GI");
-                //  Debug.Log(enemy.transform.tag);
-                //   enemy.TakeDamage(gunData.damage);
-
-                // }
-                // if (hitTransform.GetComponent<EnemyStats>() != null)
-                {
-                    //        Debug.Log("k");
-                }
-            }
-            gunData.currentAmmo--;
-            timeSinceLastShot = 0;
-            // Debug.Log(gunData.currentAmmo);
-
-            //  weapon.OnGunShot();
-        }
-    }
-        public void ShootAuto()
-        {
-
-            if (CanShoot())
+            if (inventoryScript.FireWeapon())
             {
+                //AMMO COUNT ANCHORED TO WEAPON///////////////////////////////////
+              //  t.text = inventoryScript.;
                 muzleFlash.Emit(1);
+
                 // Debug.Log("canshoot");
                 Transform hitTransform = null;
                 Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
@@ -132,7 +86,7 @@ public class Gun : MonoBehaviour
                    // hitTransform = hitInfo.transform;
                    // ray.origin = hitInfo.point;
                    //  Debug.DrawLine(ray.origin, hitInfo.point,Color.red,2.0f);
-                   Instantiate(vfxHitGreen, hitInfo.point, Quaternion.identity);
+                    Instantiate(vfxHitGreen, hitInfo.point, Quaternion.identity);
                     //EnemyStats enemy = hitInfo.transform.GetComponent<EnemyStats>();
                     //if (enemy != null)
                     //    Debug.Log("hi" + enemy.tag);
@@ -168,12 +122,74 @@ public class Gun : MonoBehaviour
                         //        Debug.Log("k");
                     }
                 }
-                gunData.currentAmmo--;
+                // gunData.currentAmmo--;
                 timeSinceLastShot = 0;
                 // Debug.Log(gunData.currentAmmo);
 
                 //  weapon.OnGunShot();
             }
+        }
+    }
+        public void ShootAuto()
+        {
+
+        if (CanShoot())
+        {
+            if (inventoryScript.FireWeapon())
+            {
+                muzleFlash.Emit(1);
+                // Debug.Log("canshoot");
+                Transform hitTransform = null;
+                Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+                Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+                if (Physics.Raycast(ray, out RaycastHit hitInfo, gunData.maxDistance, aimColliderLayerMask))
+                {  // debugTransform.position = hitInfo.point;
+                   // hitTransform = hitInfo.transform;
+                   // ray.origin = hitInfo.point;
+                   //  Debug.DrawLine(ray.origin, hitInfo.point,Color.red,2.0f);
+                    Instantiate(vfxHitGreen, hitInfo.point, Quaternion.identity);
+                    //EnemyStats enemy = hitInfo.transform.GetComponent<EnemyStats>();
+                    //if (enemy != null)
+                    //    Debug.Log("hi" + enemy.tag);
+                    //EnemyStats enemy1 = hitInfo.collider.transform.GetComponent<EnemyStats>();
+                    //if (enemy1 != null)
+                    //    Debug.Log("hello" + enemy1.tag);
+                    Vector3 aimDir = (hitInfo.point - SpawnBullet.position).normalized;
+
+                    Instantiate(pfBullet, SpawnBullet.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                    BulletProjectile bullet = pfBullet.GetComponent<BulletProjectile>();
+
+                    bullet.damage = gunData.damage;
+                    bullet.speed = gunData.maxDistance;
+
+                    // string hitTag = hitInfo.collider.gameObject.tag;
+                    // Debug.Log(hitTag);
+                    // Debug.Log(hitInfo.transform.tag);
+                    // var hitBox=hitInfo.collider.GetComponent<EnemyStats>();
+                    // if (hitBox != null)
+                    {
+                        // Debug.Log(hitBox.transform.tag);
+                        //    hitBox.TakeDamage(gunData.damage);
+                    }
+                    // EnemyStats enemy = hitInfo.transform.GetComponent<EnemyStats>();
+                    //  if(enemy != null) {
+                    //    Debug.Log("GI");
+                    //  Debug.Log(enemy.transform.tag);
+                    //   enemy.TakeDamage(gunData.damage);
+
+                    // }
+                    // if (hitTransform.GetComponent<EnemyStats>() != null)
+                    {
+                        //        Debug.Log("k");
+                    }
+                }
+                // gunData.currentAmmo--;
+                timeSinceLastShot = 0;
+                // Debug.Log(gunData.currentAmmo);
+
+                //  weapon.OnGunShot();
+            }
+        }
         }
 
 

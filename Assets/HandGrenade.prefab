@@ -53,6 +53,10 @@ PrefabInstance:
       value: HandGrenade
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4774027228a0c73478d667fb5f64d52d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4774027228a0c73478d667fb5f64d52d, type: 3}
       propertyPath: m_TagString
       value: handGrenade
       objectReference: {fileID: 0}

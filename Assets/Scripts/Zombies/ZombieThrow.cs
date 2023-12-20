@@ -18,6 +18,7 @@ public class ZombieThrow : MonoBehaviour
     public Transform bladeArea;
     public Transform launchPoint;
     public GameObject bladePrefab;
+    public InventoryScript inventoryScript;
 
     void Start()
     {
@@ -133,7 +134,7 @@ public class ZombieThrow : MonoBehaviour
 
     private void AttackTarget(PlayerStats playerStats)
     {
-        if (!playerStats.isDead)
+        if (inventoryScript.leonHealthPoints != 0)
         {
             //agent.transform.forward = target.position;
             RotateToTarget();
@@ -141,7 +142,8 @@ public class ZombieThrow : MonoBehaviour
             StartCoroutine(ThrowBlade());
             stats.damage = 3;
             if (!playerStats.isGrappled)
-                stats.DealDamage(playerStats);
+                inventoryScript.DecreasePlayerHealth(3);
+                //stats.DealDamage(playerStats);
             isStopped = true;
         }
     }

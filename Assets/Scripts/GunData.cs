@@ -14,8 +14,8 @@ public class GunData : ScriptableObject
     public float maxDistance;
 
     [Header("Reloading")]
-    public int currentAmmo;
-    public int magSize;
+   // public int currentAmmo;
+   // public int magSize;
     [Tooltip("In RPM")] public float fireRate;
     public float reloadTime;
     [HideInInspector] public bool reloading;

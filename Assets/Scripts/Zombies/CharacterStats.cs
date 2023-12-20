@@ -7,6 +7,7 @@ public class CharacterStats : MonoBehaviour
     [SerializeField] public int health;
     [SerializeField] public int maxHealth;
     [SerializeField] public bool isDead;
+    public InventoryScript inventoryScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,8 +40,13 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        int healthAfterDamage = health - damage;
-        SetHealthTo(healthAfterDamage);
+        bool isDead = inventoryScript.DecreasePlayerHealth(damage);
+        if (isDead)
+        {
+            Die();
+        }
+        //int healthAfterDamage = health - damage;
+        SetHealthTo(inventoryScript.leonHealthPoints);
     }
     public void Heal(int heal)
     {
@@ -49,7 +55,7 @@ public class CharacterStats : MonoBehaviour
     }
     public virtual  void InitVariables()
     {
-        maxHealth = 5;
+        maxHealth = inventoryScript.leonHealthPoints;
         SetHealthTo(maxHealth);
         isDead = false;
     }

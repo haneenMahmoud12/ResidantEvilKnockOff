@@ -26,7 +26,7 @@ public class Move : MonoBehaviour {
     {
         if (!enemyStats.isDead)
         {
-            stats.DealDamage(enemyStats);
+            stats.DealDamage(enemyStats,1);
             enemyStats.isHit = true;
         }
     }

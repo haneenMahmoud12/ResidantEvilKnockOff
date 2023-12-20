@@ -14,6 +14,7 @@ public class ZombieContollerPetroling : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] GameObject[] waypoints;
     int i=0;
+    public InventoryScript inventoryScript;
 
     void Start()
     {
@@ -164,13 +165,16 @@ public class ZombieContollerPetroling : MonoBehaviour
 
     private void AttackTarget(PlayerStats playerStats)
     {
-        if (!playerStats.isDead)
+        if (inventoryScript.leonHealthPoints !=0)
         {
             RotateToTarget();
             anim.SetTrigger("Attack");
             stats.damage = 2;
             if (!playerStats.isGrappled)
-                stats.DealDamage(playerStats);
+                inventoryScript.DecreasePlayerHealth(2);
+            //stats.DealDamage(playerStats);
+            //inventoryScript.DecreasePlayerHealth(2);
+            //stats.DealDamage(playerStats);
         }
     }
 }

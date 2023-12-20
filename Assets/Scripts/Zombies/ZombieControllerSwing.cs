@@ -12,7 +12,7 @@ public class ZombieContollerSwing : MonoBehaviour
     private bool isStopped = false;
     private bool playerNear = false;
     [SerializeField] Transform target;
-
+    public InventoryScript inventoryScript;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -152,13 +152,14 @@ public class ZombieContollerSwing : MonoBehaviour
 
     private void AttackTarget(PlayerStats playerStats)
     {
-        if (!playerStats.isDead)
+        if (inventoryScript.leonHealthPoints!=0)
         {
             RotateToTarget();
             anim.SetTrigger("Attack");
             stats.damage = 2;
             if (!playerStats.isGrappled)
-                stats.DealDamage(playerStats);
+                inventoryScript.DecreasePlayerHealth(2);
+            //stats.DealDamage(playerStats);
         }
     }
 }

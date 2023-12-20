@@ -53,6 +53,10 @@ PrefabInstance:
       value: MK13 Flash Bang
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d24b8597e25f0814ea3f16540e33bc48, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d24b8597e25f0814ea3f16540e33bc48, type: 3}
       propertyPath: m_TagString
       value: flashGrenade
       objectReference: {fileID: 0}
@@ -117,7 +121,7 @@ MonoBehaviour:
   grenadeTimer: 3
   radius: 15
   giveDamage: 4
-  explosionEffect: {fileID: 1972207730512856, guid: ea4fb55d0227e604386f44f905cfe7c0, type: 3}
+  explosionEffect: {fileID: 1329845292236604, guid: 5f7ad62c5f2fbe043afcc693ba22c924, type: 3}
   buyPrice: 15
   sellPrice: 10
 --- !u!65 &-498685634939228678

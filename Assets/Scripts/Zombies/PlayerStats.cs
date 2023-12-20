@@ -11,6 +11,7 @@ public class PlayerStats : CharacterStats
     public bool isInvincible;
 
     // Start is called before the first frame update
+   
     void Start()
     {
         InitVariables();
@@ -27,7 +28,7 @@ public class PlayerStats : CharacterStats
     }
     public override void InitVariables()
     {
-        maxHealth = 15;
+        maxHealth = 8;
         SetHealthTo(maxHealth);
         isDead = false;
         damage = 1;
@@ -37,19 +38,11 @@ public class PlayerStats : CharacterStats
         isInvincible = false;
     }
 
-    public void DealDamage(CharacterStats stats)
+    public void DealDamage(CharacterStats stats, int damagePoints)
     {
-        stats.TakeDamage(damage);
+        stats.TakeDamage(damagePoints);
     }
-
-    public void HealCheat()
-    {
-        health += 4; 
-    }
-    public void InvincibilityCheat()
-    {
-        isInvincible = true;
-    }
+    
     public void SloMoCheat()
     {
        //health += 4;

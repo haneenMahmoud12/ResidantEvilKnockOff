@@ -14,12 +14,14 @@ public class ZombieContollerGrapple : MonoBehaviour
     private PlayerStats playerStats;
     [SerializeField] Transform target;
     [SerializeField] Animator playerAnim;
+    public InventoryScript inventoryScript;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         stats = GetComponent<EnemyStats>();
+        stats.damage = 5;
         
        // target = GetComponent<Transform>();
         playerStats = target.GetComponent<PlayerStats>();
@@ -156,7 +158,7 @@ public class ZombieContollerGrapple : MonoBehaviour
 
     private void AttackTarget(PlayerStats playerStats)
     {
-        if (!playerStats.isDead && !playerStats.isGrappled)
+        if (inventoryScript.leonHealthPoints !=0)
         {
             RotateToTarget();
             anim.SetTrigger("Attack");
@@ -164,7 +166,10 @@ public class ZombieContollerGrapple : MonoBehaviour
             playerStats.isGrappled = true;
             playerAnim.SetBool("isGrappled", true);
             stats.damage = 5;
-            stats.DealDamage(playerStats);
+
+            //stats.DealDamage(playerStats);
+            //Debug.Log(stats.damage);
+            inventoryScript.DecreasePlayerHealth(5);
         }
     }
     private IEnumerator NotGrappled()

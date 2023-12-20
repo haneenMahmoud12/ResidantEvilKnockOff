@@ -12,7 +12,7 @@ public class Grenade1 : MonoBehaviour
     public int buyPrice = 15;
     public int sellPrice = 10;
     bool hasExploded = false;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +35,8 @@ public class Grenade1 : MonoBehaviour
     {
         Instantiate(explosionEffect, transform.position, transform.rotation);
 
+        
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (Collider nearbyObject in colliders)
         {
@@ -43,7 +45,7 @@ public class Grenade1 : MonoBehaviour
             {
                 if (gameObject.tag == "handGrenade")
                 {
-                    Debug.Log("hi");
+                    //Debug.Log("hi");
                     obj.TakeDamage(giveDamage);
                     
                 }
