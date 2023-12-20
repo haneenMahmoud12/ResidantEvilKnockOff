@@ -124,6 +124,7 @@ MonoBehaviour:
   explosionEffect: {fileID: 1329845292236604, guid: 5f7ad62c5f2fbe043afcc693ba22c924, type: 3}
   buyPrice: 15
   sellPrice: 10
+  sharpnelsEffect: {fileID: 0}
 --- !u!65 &-498685634939228678
 BoxCollider:
   m_ObjectHideFlags: 0

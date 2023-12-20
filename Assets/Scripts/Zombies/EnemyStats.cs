@@ -24,6 +24,7 @@ public class EnemyStats : CharacterStats
     {
         InitVariables();
         healthBar.SetMaxHealth(maxHealth);
+        anim = GetComponent<Animator>();
     }
 
     public override void TakeDamage(int damage)
@@ -51,6 +52,20 @@ public class EnemyStats : CharacterStats
         yield return new WaitForSeconds(5f);
         isEnemyKnockedDown = false;
         anim.SetBool("isKnockedDown", false);
+    }
+
+    public void hit()
+    {
+        StartCoroutine(hitAnim());
+    }
+
+
+    IEnumerator hitAnim()
+    {
+        anim.SetBool("weapon hit", true);
+        yield return new WaitForSeconds(2f);
+
+        anim.SetBool("weapon hit", false);
     }
     public override void CheckHealth()
     {

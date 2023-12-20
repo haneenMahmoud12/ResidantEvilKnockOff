@@ -102,18 +102,18 @@ public class InventoryScript : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        /*if (Input.GetKeyDown(KeyCode.R))
         {
             
             bool reload = ReloadWeapon();
-        }
+        }*/
 
-        if (Input.GetKeyDown(KeyCode.T))
+       /* if (Input.GetKeyDown(KeyCode.T))
         {
 
             bool reload = ThrowGrenade();
             Debug.Log(reload);
-        }
+        }*/
        
 
     }
@@ -121,28 +121,31 @@ public class InventoryScript : MonoBehaviour
     public bool collectItem(string item)
     {
         bool flag = false;
-        foreach (GameObject inventoryItem in inventory) {
+        foreach (GameObject inventoryItem in inventory)
+        {
             InventoryCardScript script = inventoryItem.GetComponent<InventoryCardScript>();
 
             if (script.card == null)
             {
                 switch (item)
                 {
-                    case "Green Herb": script.card = greenHerb;break;
-                    case "Red Herb": script.card = redHerb;break;
+                    case "Green Herb": script.card = greenHerb; break;
+                    case "Red Herb": script.card = redHerb; break;
                     case "Normal Gunpowder": script.card = normalGunPowder; break;
                     case "High-Grade Gunpowder": script.card = highGradeGunPowder; break;
-                    case "Hand Gernade": script.card = handGrenade ; break;
+                    case "Hand Gernade": script.card = handGrenade; break;
                     case "Flash Gernade": script.card = flashGrenade; break;
                     case "Revolver": script.card = revolver; break;
                     case "Rifle": script.card = rifle; break;
                     case "Shotgun": script.card = shotGun; break;
                     case "Emblem": script.card = emblem; break;
                     case "Spade Key ": script.card = spadeCard; break;
-                    case "Heart Key":script.card = heartKey;
+                    case "Heart Key":
+                        script.card = heartKey;
                         break;
                     case "Club Key": script.card = clubKey; break;
                     case "Diamond Key": script.card = diamondKey; break;
+                    case "KeyCard": script.card = keyCard; break;
                     case "Gold Bar": script.card = goldBar; break;
                     case "Ruby": script.card = ruby; break;
                     case "Emerald": script.card = goldBar; break;
@@ -155,7 +158,7 @@ public class InventoryScript : MonoBehaviour
 
                 flag = true;
                 break;
-              
+
             }
 
         }
@@ -164,7 +167,7 @@ public class InventoryScript : MonoBehaviour
 
     }
 
-    public void collectAmmo (string item , int ammount)
+    public void collectAmmo(string item, int ammount)
     {
         if (item == "Pistol Ammo" || item == "Rifle Ammo" || item == "Shotgun Ammo" || item == "Revolver Ammo")
         {
@@ -216,7 +219,6 @@ public class InventoryScript : MonoBehaviour
             }
         }
     }
-
     public void collectGold(int goldAmmount)
     {
         leonGold += goldAmmount;
@@ -339,10 +341,6 @@ public class InventoryScript : MonoBehaviour
     {
         int index = selectedItem == "Button1" ? 1 :(selectedItem == "Button2" ? 2 :(selectedItem == "Button3" ?3 : (selectedItem == "Button4"?4 :
             (selectedItem == "Button5"? 5 : 6)))) ;
-
-       
-
-
         GameObject item = inventory[index-1];
         InventoryCardScript script = item.GetComponent<InventoryCardScript>();
         if (script.cardName.text == "Green Herb")
@@ -471,15 +469,10 @@ public class InventoryScript : MonoBehaviour
         script.Initialize();
     }
 
-
     public void Equip()
     {
         int index = selectedItem == "Button1" ? 1 : (selectedItem == "Button2" ? 2 : (selectedItem == "Button3" ? 3 : (selectedItem == "Button4" ? 4 :
            (selectedItem == "Button5" ? 5 : 6))));
-
-
-
-
         GameObject item = inventory[index - 1];
         InventoryCardScript script = item.GetComponent<InventoryCardScript>();
         if (script.cardName.text == "Rifle" || script.cardName.text == "Shotgun" ||
@@ -502,8 +495,7 @@ public class InventoryScript : MonoBehaviour
 
     }
     public void CheckCardType(InventoryCardScript script)
-    {
-                
+    {               
         if (script.card != null)
         {
             Debug.Log(script.cardName.text);
@@ -688,8 +680,6 @@ public class InventoryScript : MonoBehaviour
         }
         return ammos;
     }
-
-
     public bool ThrowGrenade ()
     {
         if(leonEquippedGrenade == "")

@@ -3,7 +3,35 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - DayLightRoomZombie
+  - Item
+  - DoorKeyCard
+  - Door
+  - DoorDiamond
+  - DoorSpade
+  - DoorHeart
+  - Ruby
+  - Green Herb
+  - Red Herb
+  - Emerald
+  - Revolver
+  - Hand Gernade
+  - Flash Grenade
+  - High-Grade Gunpowder
+  - Normal Gunpowder
+  - CinemachineTarget
+  - Gun
+  - flashGrenade
+  - handGrenade
+  - Emblem
+  - OfficeZombie
+  - VisitRoomZombie
+  - DiningRoomZombie
+  - KeyCard
+  - DoorEmblem
+  - Spade Key
+  - Diamond Key
   layers:
   - Default
   - TransparentFX

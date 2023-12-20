@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: pistol
   damage: 2
-  maxDistance: 50
-  currentAmmo: 78
-  magSize: 12
+  maxDistance: 10
   fireRate: 300
   reloadTime: 1.5
   reloading: 0
+  Automatic: 0

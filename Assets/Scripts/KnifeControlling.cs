@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class knifeControlling : MonoBehaviour
 {
-    public int durability;
+    // public int durability;
     public Animator anim;
     EnemyStats obj;
-   
+    public InventoryScript inventoryScript;
+    public GameObject knife;
+
     // Start is called before the first frame update
     void Start()
     {
-        durability = 5;
+
         anim = GetComponent<Animator>();
         obj = GetComponent<EnemyStats>();
     }
@@ -21,46 +23,49 @@ public class knifeControlling : MonoBehaviour
     void Update()
     {
         //GrenadeDamageScript[] enemies = GrenadeDamageScript.t("enemy");
-       // bool check = CheckCloseToTag("enemy", 2);
+        // bool check = CheckCloseToTag("enemy", 2);
         //bool knockedDown = isEnemyKnockedDown("enemy", 2);
 
 
-        
-            
-            
-            if (durability >= 1 && Input.GetKeyDown(KeyCode.K))
 
-            {
-            bool knockedDown = isEnemyKnockedDown("enemy", 2);
+
+
+        if (inventoryScript.leonKniefDurability >= 1 && Input.GetKeyDown(KeyCode.E))
+
+        {
+            bool knockedDown = isEnemyKnockedDown(2);
             if (knockedDown)
             {
 
-                //ACTIVATE KNIFE GAMEOBJECT
+                knife.SetActive(true);
                 //stab knocked down enemy
-                durability -= 1;
+                inventoryScript.DecreaseKniefDurability(1);
+                //durability -= 1;
                 Debug.Log("knockeddown");
 
                 StartCoroutine(stabKnockedDownEnemy());
                 //deplete all enemy's health
 
 
+
             }
-            
+
 
 
         }
 
 
         //if (anim.GetCurrentAnimatorStateInfo(0).IsName("TakenHostage"))
-        if(anim.GetBool("isGrappled"))
-        { //ACTIVATE KNIFE GAMEOBJECT
-            bool check = CheckCloseToTag("enemy", 2);
-            if (durability > 1 && Input.GetKeyDown(KeyCode.K) && check)
+        if (anim.GetBool("isGrappled"))
+        {
+            knife.SetActive(true);
+            bool check = CheckCloseToTag(2);
+            if (inventoryScript.leonKniefDurability > 1 && Input.GetKeyDown(KeyCode.E) && check)
             {
 
                 anim.SetBool("stab", true);
                 anim.SetBool("isGrappled", false);
-                durability -= 2;
+                inventoryScript.DecreaseKniefDurability(2);
 
             }
         }
@@ -77,30 +82,31 @@ public class knifeControlling : MonoBehaviour
 
 
     }
-    bool CheckCloseToTag(string tag, float minimumDistance)
+    bool CheckCloseToTag(float minimumDistance)
     {
-        GameObject[] goWithTag = GameObject.FindGameObjectsWithTag(tag);
+        EnemyStats[] goWithType = FindObjectsOfType<EnemyStats>();
 
-        for (int i = 0; i < goWithTag.Length; ++i)
+        for (int i = 0; i < goWithType.Length; ++i)
         {
-            if (Vector3.Distance(transform.position, goWithTag[i].transform.position) <= minimumDistance)
+            if (Vector3.Distance(transform.position, goWithType[i].transform.position) <= minimumDistance)
                 return true;
         }
 
         return false;
     }
-    bool isEnemyKnockedDown(string tag, float minimumDistance)
+    bool isEnemyKnockedDown(float minimumDistance)
     {
-        GameObject[] goWithTag = GameObject.FindGameObjectsWithTag(tag);
+        EnemyStats[] goWithType = FindObjectsOfType<EnemyStats>();
 
-        for (int i = 0; i < goWithTag.Length; ++i)
+        for (int i = 0; i < goWithType.Length; ++i)
         {
-            if (Vector3.Distance(transform.position, goWithTag[i].transform.position) <= minimumDistance)
+            if (Vector3.Distance(transform.position, goWithType[i].transform.position) <= minimumDistance)
             {
-                EnemyStats obj = goWithTag[i].GetComponent<EnemyStats>();
+                EnemyStats obj = goWithType[i].GetComponent<EnemyStats>();
                 if (obj != null)
                 {
                     obj.Die();
+
                     return obj.isEnemyKnockedDown;
                 }
 

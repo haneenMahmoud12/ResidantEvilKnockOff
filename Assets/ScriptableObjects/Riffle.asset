@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   damage: 1
-  maxDistance: 50
-  currentAmmo: 99673
-  magSize: 30
+  maxDistance: 10
   fireRate: 300
   reloadTime: 1.5
   reloading: 0

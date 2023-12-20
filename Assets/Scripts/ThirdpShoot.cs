@@ -21,7 +21,8 @@ public class ThirdpShoot : MonoBehaviour
     public GameObject Rifle;
     public GameObject Revolver;
     public GameObject pistol;
-    
+    public GameObject knife;
+
     public Gun weapon;
     public ParticleSystem hiteffect;
 
@@ -31,6 +32,7 @@ public class ThirdpShoot : MonoBehaviour
     private ThirdPersonController thirdPersonController;
     private Animator animator;
     public InventoryScript inventoryScript;
+    public Grenades grenadesScript;
 
     private void Awake()
     {
@@ -46,10 +48,10 @@ public class ThirdpShoot : MonoBehaviour
 
     }
    
-    void Start()
+    /*void Start()
     {
       
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -77,6 +79,11 @@ public class ThirdpShoot : MonoBehaviour
             else
                 Time.timeScale = 1;
         }
+        if (Input.GetKeyDown(KeyCode.Escape) && inventoryScript.isActiveAndEnabled)
+        {
+            inventoryScript.CloseInventory();
+        }
+
         weapontag = inventoryScript.leonEquippedWeapon;
         if (weapontag.Equals("Rifle"))
         {
@@ -85,7 +92,8 @@ public class ThirdpShoot : MonoBehaviour
             Rifle.SetActive(true);
             pistol.SetActive(false);
             Revolver.SetActive(false);
-             weapon = FindAnyObjectByType<Gun>();
+            knife.SetActive(false);
+            weapon = FindAnyObjectByType<Gun>();
         }
         if (weapontag.Equals("Shotgun"))
         {
@@ -94,6 +102,7 @@ public class ThirdpShoot : MonoBehaviour
             Rifle.SetActive(false);
             pistol.SetActive(false);
             Revolver.SetActive(false);
+            knife.SetActive(false);
             weapon = FindAnyObjectByType<Gun>();
         }
         if (weapontag.Equals("Revolver"))
@@ -103,6 +112,7 @@ public class ThirdpShoot : MonoBehaviour
             Rifle.SetActive(false);
             pistol.SetActive(false);
             Revolver.SetActive(true);
+            knife.SetActive(false);
             weapon = FindAnyObjectByType<Gun>();
         }
         if (weapontag.Equals("Pistol"))
@@ -112,6 +122,7 @@ public class ThirdpShoot : MonoBehaviour
             Rifle.SetActive(false);
             pistol.SetActive(true);
             Revolver.SetActive(false);
+            knife.SetActive(false);
             weapon = FindAnyObjectByType<Gun>();
         }
 
@@ -121,7 +132,7 @@ public class ThirdpShoot : MonoBehaviour
         Transform hitTransform = null;
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
         {
-           // debugTransform.position = raycastHit.point;
+            // debugTransform.position = raycastHit.point;
             mouseWorldPosition = raycastHit.point;
             hitTransform = raycastHit.transform;
         }
@@ -129,8 +140,7 @@ public class ThirdpShoot : MonoBehaviour
 
 
         //Aim
-
-        if (starterAssetsInputs.aim)
+        if (starterAssetsInputs.aim && inventoryScript.leonEquippedWeapon != "" && inventoryScript.leonEquippedGrenade == "")
         {
             aimVirtualCamera.gameObject.SetActive(true);
             thirdPersonController.SetSensitivity(aimSensitivity);
@@ -142,55 +152,57 @@ public class ThirdpShoot : MonoBehaviour
             Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
 
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+            //aimVirtualCamera.transform.forward= transform.forward;
             PlayerInput pi = GetComponent<PlayerInput>();
             pi.actions.FindAction("Sprint").Disable();
 
             //Shoot
             //removed-> starterAssetsInputs.shoot
-            if (Input.GetKey(KeyCode.B) && !weapon.gunData.Automatic)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !weapon.gunData.Automatic && inventoryScript.leonEquippedGrenade == "")
             {
-                
-                    weapon.Shoot();
-                    //if (weapon.CanShoot())
-                    //{
-                    //    Debug.Log("canshoot");
-                    //    if (Physics.Raycast(ray, out RaycastHit hitInfo, weapon.gunData.maxDistance, aimColliderLayerMask))
-                    //    {
-                    //        weapon.Shoot();
-                    //        hiteffect.transform.position = raycastHit.point;
-                    //        hiteffect.transform.forward = raycastHit.normal;
-                    //        hiteffect.Emit(1);
-                    //        Debug.Log(hitInfo.transform.name);
-                    //    }
-                    //    weapon.gunData.currentAmmo--;
-                    //    weapon.timeSinceLastShot = 0;
-                    //    weapon.timeSinceLastShot += Time.deltaTime;
-                    //    //  weapon.OnGunShot();
-                    //}
-                    //if (hitTransform != null)
-                    //{
-                    //    if (hitTransform.GetComponent<BulletTarget>() != null)
-                    //    {
-                    //        Instantiate(vfxHitGreen, hitTransform.position, Quaternion.identity);
-                    //    }
-                    //    else
-                    //    {
-                    //        Instantiate(vfxHitRed, hitTransform.position, Quaternion.identity);
-                    //    }
-                    //}
 
-                    starterAssetsInputs.shoot = false;
-                
+                weapon.Shoot();
+                //if (weapon.CanShoot())
+                //{
+                //    Debug.Log("canshoot");
+                //    if (Physics.Raycast(ray, out RaycastHit hitInfo, weapon.gunData.maxDistance, aimColliderLayerMask))
+                //    {
+                //        weapon.Shoot();
+                //        hiteffect.transform.position = raycastHit.point;
+                //        hiteffect.transform.forward = raycastHit.normal;
+                //        hiteffect.Emit(1);
+                //        Debug.Log(hitInfo.transform.name);
+                //    }
+                //    weapon.gunData.currentAmmo--;
+                //    weapon.timeSinceLastShot = 0;
+                //    weapon.timeSinceLastShot += Time.deltaTime;
+                //    //  weapon.OnGunShot();
+                //}
+                //if (hitTransform != null)
+                //{
+                //    if (hitTransform.GetComponent<BulletTarget>() != null)
+                //    {
+                //        Instantiate(vfxHitGreen, hitTransform.position, Quaternion.identity);
+                //    }
+                //    else
+                //    {
+                //        Instantiate(vfxHitRed, hitTransform.position, Quaternion.identity);
+                //    }
+                //}
+
+                starterAssetsInputs.shoot = false;
+
 
             }
             // while (Input.GetKey(KeyCode.Mouse0) && weapon.gunData.Automatic)
 
-            if ((Input.GetKey(KeyCode.B) && weapon.gunData.Automatic))
-                {
-               
-                    // Space key is being held down
-                    weapon.ShootAuto();
-                
+            if ((Input.GetKey(KeyCode.Mouse0) && weapon.gunData.Automatic))
+            {
+
+                // Space key is being held down
+                weapon.ShootAuto();
+
+
             }
 
 
@@ -211,11 +223,11 @@ public class ThirdpShoot : MonoBehaviour
 
         if (starterAssetsInputs.reload)
         {
-            if (inventoryScript.ReloadWeapon()) {
+            if (inventoryScript.ReloadWeapon())
+            {
                 weapon.StartReload();
             }
         }
-
 
     }
     private void OnTriggerStay(Collider other)
@@ -250,23 +262,10 @@ public class ThirdpShoot : MonoBehaviour
             {
                 Debug.Log(" spadeDOOR CANNOT OPEN WITHOUT KEY");
             }
-            
-
-            }
-        if (other.CompareTag("DoorEmblem") && Input.GetKey(KeyCode.E))
-        {
-            if (inventoryScript.EmblemFound())
-            {
-                Animator dooranim = other.GetComponent<Animator>();
-                dooranim.SetBool("unlock", true);
-            }
-            else
-            {
-                Debug.Log("DoorEmblem CANNOT OPEN WITHOUT KEY");
-            }
 
 
         }
+
         if (other.CompareTag("DoorKeyCard") && Input.GetKey(KeyCode.E))
         {
             if (inventoryScript.KeycardFound())
@@ -281,7 +280,22 @@ public class ThirdpShoot : MonoBehaviour
 
 
         }
+        if (other.CompareTag("DoorEmblem") && Input.GetKey(KeyCode.E))
+        {
+            if (inventoryScript.EmblemFound())
+            {
+                Animator dooranim = other.GetComponent<Animator>();
+                dooranim.SetBool("unlock", true);
+                Debug.Log("Congrats u escaped the zombies");
+            }
+            else
+            {
+                Debug.Log(" Emblem CANNOT OPEN WITHOUT KEY");
+            }
+
+
+        }
     }
-    
+
 
 }
