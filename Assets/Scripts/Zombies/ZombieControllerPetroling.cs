@@ -15,7 +15,7 @@ public class ZombieContollerPetroling : MonoBehaviour
     [SerializeField] GameObject[] waypoints;
     int i=0;
     public InventoryScript inventoryScript;
-
+    public AudioSource zombieIsPetroling;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -112,6 +112,7 @@ public class ZombieContollerPetroling : MonoBehaviour
 
         if (!playerNear && gameObject!=null)
         {
+            zombieIsPetroling.Play();
             if (agent.remainingDistance < 1.5f)
             {
                 i = (i + 1) % waypoints.Length;
@@ -124,7 +125,7 @@ public class ZombieContollerPetroling : MonoBehaviour
     private void MoveToTarget()
     {
         agent.SetDestination(target.position);
-        //transform.LookAt(target);
+        stats.ZombieRunning();
         anim.SetBool("playerNear", true);
         anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
         //RotateToTarget();

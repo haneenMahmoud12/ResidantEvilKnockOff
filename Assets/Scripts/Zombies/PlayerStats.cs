@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : CharacterStats
 {
@@ -9,6 +10,7 @@ public class PlayerStats : CharacterStats
     [SerializeField] private bool canAttack;*/
     public bool isGrappled;
     public bool isInvincible;
+    public AudioSource leonDying;
 
     // Start is called before the first frame update
    
@@ -24,7 +26,8 @@ public class PlayerStats : CharacterStats
     public override void Die()
     {
         base.Die();
-        //Destroy(gameObject);
+        leonDying.Play();
+        StartCoroutine(DelayDeath());
     }
     public override void InitVariables()
     {
@@ -43,16 +46,11 @@ public class PlayerStats : CharacterStats
         stats.TakeDamage(damagePoints);
     }
     
-    public void SloMoCheat()
+    private IEnumerator DelayDeath()
     {
-       //health += 4;
+        yield return new WaitForSeconds(4);
+        SceneManager.LoadScene("GameOver");
     }
-    public void GoldCheat()
-    {
-        health += 4;
-    }
-    public void DoorCheat()
-    {
-        health += 4;
-    }
+
+
 }

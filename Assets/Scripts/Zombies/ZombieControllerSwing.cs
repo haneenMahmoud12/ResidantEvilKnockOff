@@ -111,6 +111,7 @@ public class ZombieContollerSwing : MonoBehaviour
     private void MoveToTarget()
     {
         agent.SetDestination(target.position);
+        stats.ZombieRunning();
         anim.SetBool("playerNear", true);
         anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
         //RotateToTarget();

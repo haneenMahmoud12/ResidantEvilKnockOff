@@ -73,8 +73,10 @@ public class InventoryScript : MonoBehaviour
     [SerializeField] private Animator playerAnim;
 
     [SerializeField] GameObject player;
+    public PlayerStats playerStats;
 
     [SerializeField] Slider slider;
+    public AudioSource leonIsHit;
     public bool brokeFormGrapple = false;
     //[SerializeField] LeonHealthBar leonHealthBar;
 
@@ -90,6 +92,7 @@ public class InventoryScript : MonoBehaviour
             thirdPersonController = player.GetComponent<ThirdPersonController>();
             starterAssetsInputs = player.GetComponent<StarterAssetsInputs>();
             playerAnim = player.GetComponent<Animator>();
+            playerStats = player.GetComponent<PlayerStats>();
         }
 
         gold.SetText(leonGold.ToString());
@@ -163,7 +166,7 @@ public class InventoryScript : MonoBehaviour
             }
 
         }
-        Debug.Log(flag);
+       // Debug.Log(flag);
         return flag;
 
     }
@@ -222,7 +225,7 @@ public class InventoryScript : MonoBehaviour
     }
     public void collectGold(int goldAmmount)
     {
-        Debug.Log("inventoryScript  " + goldAmmount);
+        //Debug.Log("inventoryScript  " + goldAmmount);
         leonGold += goldAmmount;
         gold.SetText((Int32.Parse(gold.text)+goldAmmount).ToString());
     }
@@ -259,6 +262,7 @@ public class InventoryScript : MonoBehaviour
 
     public bool DecreasePlayerHealth(int points)
     {
+        leonIsHit.Play();
         if (!isInvincible)
         {
             healthPoints.SetText((Int32.Parse(healthPoints.text) - points).ToString());
@@ -273,6 +277,7 @@ public class InventoryScript : MonoBehaviour
             //leonHealthBar.Health(leonHealthPoints);
             healthPoints.SetText("0");
             playerAnim.SetTrigger("die");
+            playerStats.Die();
             return true;
         }
         return false;

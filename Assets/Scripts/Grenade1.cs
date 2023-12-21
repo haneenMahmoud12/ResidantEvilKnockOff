@@ -13,6 +13,7 @@ public class Grenade1 : MonoBehaviour
     public int sellPrice = 10;
     bool hasExploded = false;
     public GameObject sharpnelsEffect;
+    //public AudioSource Explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,10 +34,7 @@ public class Grenade1 : MonoBehaviour
 
     void Explode()
     {
-
-
-
-
+        //Explosion.Play();
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (Collider nearbyObject in colliders)
         {

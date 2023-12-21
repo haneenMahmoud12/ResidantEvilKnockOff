@@ -19,7 +19,8 @@ public class EnemyStats : CharacterStats
     public Animator anim;
     public bool isEnemyKnockedDown = false;
     public HealthBar healthBar;
-
+    public AudioSource zombieDying;
+    public AudioSource zombieIsRunning;
     void Start()
     {
         InitVariables();
@@ -29,6 +30,7 @@ public class EnemyStats : CharacterStats
 
     public override void TakeDamage(int damage)
     {
+
         if (health > 0)
         {
             health = health - damage;
@@ -84,6 +86,7 @@ public class EnemyStats : CharacterStats
 
     public override void Die()
     {
+        zombieDying.Play();
         killZombie = true;
         base.Die();
         Destroy(gameObject,5);
@@ -105,7 +108,7 @@ public class EnemyStats : CharacterStats
     }
     public override void InitVariables() 
     {
-        maxHealth = 5;
+        maxHealth = 4;
         SetHealthTo(maxHealth);
         isDead = false;
         damage = 1;
@@ -117,5 +120,10 @@ public class EnemyStats : CharacterStats
     public void DealDamage(CharacterStats stats)
     {
         stats.TakeDamage(damage);
+    }
+
+    public void ZombieRunning()
+    {
+        zombieIsRunning.Play();
     }
 }

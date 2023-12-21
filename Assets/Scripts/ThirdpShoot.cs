@@ -142,17 +142,19 @@ public class ThirdpShoot : MonoBehaviour
         //Aim
         if (starterAssetsInputs.aim && inventoryScript.leonEquippedWeapon != "" && inventoryScript.leonEquippedGrenade == "")
         {
-            aimVirtualCamera.gameObject.SetActive(true);
-            thirdPersonController.SetSensitivity(aimSensitivity);
-            thirdPersonController.SetRotateOnMove(false);
-            animator.SetLayerWeight(1, 1f);
-
             Vector3 worldAimTarget = mouseWorldPosition;
             worldAimTarget.y = transform.position.y;
             Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
 
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
-            //aimVirtualCamera.transform.forward= transform.forward;
+            aimVirtualCamera.transform.forward = transform.forward;
+            aimVirtualCamera.gameObject.SetActive(true);
+            thirdPersonController.SetSensitivity(aimSensitivity);
+            thirdPersonController.SetRotateOnMove(false);
+            animator.SetLayerWeight(1, 1f);
+
+            
+            
             PlayerInput pi = GetComponent<PlayerInput>();
             pi.actions.FindAction("Sprint").Disable();
 
@@ -280,8 +282,9 @@ public class ThirdpShoot : MonoBehaviour
 
 
         }
-        if (other.CompareTag("DoorEmblem") && Input.GetKey(KeyCode.E))
+        if (other.CompareTag("DoorEmblem") && Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log("Emblem");
             if (inventoryScript.EmblemFound())
             {
                 Animator dooranim = other.GetComponent<Animator>();

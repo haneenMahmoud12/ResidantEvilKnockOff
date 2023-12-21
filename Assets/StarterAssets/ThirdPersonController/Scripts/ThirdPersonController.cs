@@ -407,7 +407,8 @@ namespace StarterAssets
             if (((other.CompareTag("Green Herb") || other.CompareTag("Red Herb")
                   || other.CompareTag("Club Key") || other.CompareTag("Spade Key") ||
                   other.CompareTag("Diamond Key") || other.CompareTag("Normal Gunpowder") || other.CompareTag("High-Grade Gunpowder") ||
-                   other.CompareTag("Emblem") || other.CompareTag("Ruby") || other.CompareTag("Emerald") || other.CompareTag("KeyCard") ||
+                   other.CompareTag("Emblem") || other.CompareTag("Ruby") || other.CompareTag("Emerald") || other.CompareTag("KeyCard") || other.CompareTag("Flash Gernade") ||
+                   other.CompareTag("Hand Gernade") ||
                     other.CompareTag("Revolver"))) && (Input.GetKeyUp(KeyCode.E)))
             {
 
@@ -459,7 +460,7 @@ namespace StarterAssets
                   || other.CompareTag("Club Key") || other.CompareTag("Spade Key") ||
                   other.CompareTag("Diamond Key") || other.CompareTag("Normal Gunpowder") || other.CompareTag("High-Grade Gunpowder") ||
                    other.CompareTag("Emblem") || other.CompareTag("Ruby") || other.CompareTag("Emerald") || other.CompareTag("KeyCard") ||
-                    other.CompareTag("Revolver"))
+                    other.CompareTag("Revolver") || other.CompareTag("Flash Gernade") || other.CompareTag("Hand Gernade"))
 
             {
                 return "Item";
