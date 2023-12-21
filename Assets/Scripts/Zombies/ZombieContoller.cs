@@ -156,8 +156,14 @@ public class ZombieContoller : MonoBehaviour
             //RotateToTarget();
             anim.SetTrigger("Attack");
             if (!playerStats.isGrappled)
-                inventoryScript.DecreasePlayerHealth(1);
+                StartCoroutine(DelayDamage());
                 //stats.DealDamage(playerStats);
         }
+    }
+
+    private IEnumerator DelayDamage()
+    {
+        yield return new WaitForSeconds(2f);
+        inventoryScript.DecreasePlayerHealth(1);
     }
 }

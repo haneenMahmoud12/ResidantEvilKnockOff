@@ -35,7 +35,7 @@ public class EnemyStats : CharacterStats
             //Debug.Log(health);
             healthBar.SetHealth(health);
         }
-        if (health == 0)
+        if (health <= 0)
             Die();
     }
 
@@ -100,12 +100,12 @@ public class EnemyStats : CharacterStats
         Instantiate(Coins, position, Quaternion.identity);
         gold = Coins.GetComponent<Gold>();
         gold.goldAmount = amount;
-        Debug.Log("EnenmyStats "+gold.goldAmount);
+        //Debug.Log("EnenmyStats "+gold.goldAmount);
         //coin.SetActive(true);
     }
     public override void InitVariables() 
     {
-        maxHealth = 4;
+        maxHealth = 5;
         SetHealthTo(maxHealth);
         isDead = false;
         damage = 1;

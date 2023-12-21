@@ -425,10 +425,11 @@ namespace StarterAssets
             {
                 Gold gold = other.GetComponent<Gold>();
                 _animator.SetBool("Pick", true);
-
-                inventoryScript.collectGold(gold.goldAmount);
-                Invoke("DelayedActionWrapper", 0.7f);
-                Debug.Log("thirdPersonController "+gold.goldAmount);
+                int goldAmount = gold.goldAmount;
+                inventoryScript.collectGold(goldAmount);
+                Debug.Log("thirdPersonController " + gold.goldAmount);
+                other.gameObject.SetActive(false);
+                Invoke("DelayedActionForGold", 0.7f);
             }
         }
 
@@ -458,7 +459,7 @@ namespace StarterAssets
                   || other.CompareTag("Club Key") || other.CompareTag("Spade Key") ||
                   other.CompareTag("Diamond Key") || other.CompareTag("Normal Gunpowder") || other.CompareTag("High-Grade Gunpowder") ||
                    other.CompareTag("Emblem") || other.CompareTag("Ruby") || other.CompareTag("Emerald") || other.CompareTag("KeyCard") ||
-                    other.CompareTag("Revolver") || other.CompareTag("Gold Bar"))
+                    other.CompareTag("Revolver"))
 
             {
                 return "Item";
@@ -470,6 +471,11 @@ namespace StarterAssets
         private void DelayedAction(Collider other)
         {
             other.gameObject.SetActive(false);
+            _animator.SetBool("Pick", false);
+
+        }
+        private void DelayedActionForGold(Collider other)
+        {
             _animator.SetBool("Pick", false);
 
         }

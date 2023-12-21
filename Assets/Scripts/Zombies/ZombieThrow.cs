@@ -142,7 +142,7 @@ public class ZombieThrow : MonoBehaviour
             StartCoroutine(ThrowBlade());
             stats.damage = 3;
             if (!playerStats.isGrappled)
-                inventoryScript.DecreasePlayerHealth(3);
+                StartCoroutine(DelayDamage());
                 //stats.DealDamage(playerStats);
             isStopped = true;
         }
@@ -161,5 +161,10 @@ public class ZombieThrow : MonoBehaviour
 
         rb.AddForce(forceToAdd,ForceMode.Impulse);
         
+    }
+    private IEnumerator DelayDamage()
+    {
+        yield return new WaitForSeconds(2f);
+        inventoryScript.DecreasePlayerHealth(3);
     }
 }

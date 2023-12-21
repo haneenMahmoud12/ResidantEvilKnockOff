@@ -171,10 +171,16 @@ public class ZombieContollerPetroling : MonoBehaviour
             anim.SetTrigger("Attack");
             stats.damage = 2;
             if (!playerStats.isGrappled)
-                inventoryScript.DecreasePlayerHealth(2);
+                StartCoroutine(DelayDamage());
             //stats.DealDamage(playerStats);
             //inventoryScript.DecreasePlayerHealth(2);
             //stats.DealDamage(playerStats);
         }
+    }
+
+    private IEnumerator DelayDamage()
+    {
+        yield return new WaitForSeconds(2f);
+        inventoryScript.DecreasePlayerHealth(2);
     }
 }

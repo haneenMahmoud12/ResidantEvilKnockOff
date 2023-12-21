@@ -24,7 +24,8 @@ public class BulletProjectile : MonoBehaviour
         {
             EnemyStats enemy = other.GetComponent<EnemyStats>();
             enemy.TakeDamage(damage);
-            enemy.hit();
+            Debug.Log("kjhkjhgk");
+           // enemy.hit();
             // anim = other.GetComponent<Animator>();
             //anim.SetBool("weapon hit", true);
             Debug.Log(other.GetComponent<EnemyStats>().tag);

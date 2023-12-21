@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.583805
+      value: -22.97
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e5a1087c565204f42969686d1df0633d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05524bc5f1bc8a247857d581f0b77a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldAmount: 0
+  goldAmount: 36
 --- !u!65 &-7239802860864765672
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -128,8 +128,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.33, y: 0.36, z: 0.27}
+  m_Center: {x: -0.06, y: -0.07, z: 0.04}
 --- !u!1001 &6518801708601218684
 PrefabInstance:
   m_ObjectHideFlags: 0

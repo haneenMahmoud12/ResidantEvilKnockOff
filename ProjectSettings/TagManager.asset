@@ -33,6 +33,7 @@ TagManager:
   - Spade Key
   - Diamond Key
   - Gold Bar
+  - Club Key
   layers:
   - Default
   - TransparentFX

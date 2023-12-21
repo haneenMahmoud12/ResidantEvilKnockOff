@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4774027228a0c73478d667fb5f64d52d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4774027228a0c73478d667fb5f64d52d, type: 3}
       propertyPath: m_TagString
@@ -145,4 +145,4 @@ MonoBehaviour:
   explosionEffect: {fileID: 1329845292236604, guid: 5f7ad62c5f2fbe043afcc693ba22c924, type: 3}
   buyPrice: 15
   sellPrice: 10
-  sharpnelsEffect: {fileID: 1025285306637258, guid: d8f0099df63275647a8bcf646df1ca00, type: 3}
+  sharpnelsEffect: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}

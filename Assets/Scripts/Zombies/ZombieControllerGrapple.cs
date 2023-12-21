@@ -130,11 +130,11 @@ public class ZombieContollerGrapple : MonoBehaviour
                 timeOfLastAttack = Time.time;
             }
             //Attack
-            if (Time.time >= timeOfLastAttack + stats.attackSpeed)
+            if (Time.time >= timeOfLastAttack + stats.attackSpeed+3)
             {
                 timeOfLastAttack = Time.time;
+                Debug.Log("hi");
                 AttackTarget(playerStats);
-                //Invoke(nameof(NotGrappled), 4);
                 StartCoroutine(NotGrappled());
             }
         }
@@ -166,18 +166,30 @@ public class ZombieContollerGrapple : MonoBehaviour
             playerStats.isGrappled = true;
             playerAnim.SetBool("isGrappled", true);
             stats.damage = 5;
+            //Debug.Log("AttackTarget");
 
             //stats.DealDamage(playerStats);
             //Debug.Log(stats.damage);
-            inventoryScript.DecreasePlayerHealth(5);
+            //inventoryScript.DecreasePlayerHealth(5);
         }
     }
     private IEnumerator NotGrappled()
     {
-        yield return new WaitForSeconds(4);
-        playerStats.isGrappled = false;
-        anim.SetBool("Grapple", false);
-        playerAnim.SetBool("isGrappled", false);
-        playerAnim.SetTrigger("StabTrig");
+       // Debug.Log("notGrappled");
+        if (inventoryScript.brokeFormGrapple)
+        {
+            inventoryScript.brokeFormGrapple = false; 
+            anim.SetBool("Grapple", false);
+        }
+        else
+        {
+            yield return new WaitForSeconds(4);
+            playerStats.isGrappled = false;
+            anim.SetBool("Grapple", false);
+            playerAnim.SetBool("isGrappled", false);
+            Debug.Log("Here");
+            playerAnim.SetTrigger("StabTrig");
+            inventoryScript.DecreasePlayerHealth(5);
+        }
     }
 }

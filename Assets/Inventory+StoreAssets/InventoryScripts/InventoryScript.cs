@@ -75,6 +75,7 @@ public class InventoryScript : MonoBehaviour
     [SerializeField] GameObject player;
 
     [SerializeField] Slider slider;
+    public bool brokeFormGrapple = false;
     //[SerializeField] LeonHealthBar leonHealthBar;
 
     // Start is called before the first frame update
