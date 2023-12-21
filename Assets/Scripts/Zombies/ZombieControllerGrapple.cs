@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class ZombieContollerGrapple : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class ZombieContollerGrapple : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] Animator playerAnim;
     public InventoryScript inventoryScript;
+    public GameObject player;
+    private bool canGrapple = true;
 
     void Start()
     {
@@ -134,9 +137,12 @@ public class ZombieContollerGrapple : MonoBehaviour
             if (Time.time >= timeOfLastAttack + stats.attackSpeed+3)
             {
                 timeOfLastAttack = Time.time;
-                Debug.Log("hi");
-                AttackTarget(playerStats);
-                StartCoroutine(NotGrappled());
+                //Debug.Log("hi");
+                if (canGrapple)
+                {
+                    AttackTarget(playerStats);
+                    StartCoroutine(NotGrappled());
+                }
             }
         }
         else
@@ -162,13 +168,16 @@ public class ZombieContollerGrapple : MonoBehaviour
         if (inventoryScript.leonHealthPoints !=0)
         {
             RotateToTarget();
-            anim.SetTrigger("Attack");
+            //anim.SetTrigger("Attack");
             anim.SetBool("Grapple",true);
             playerStats.isGrappled = true;
             playerAnim.SetBool("isGrappled", true);
+            PlayerInput pi = player.GetComponent<PlayerInput>();
+            pi.actions.FindAction("Sprint").Disable();
+            pi.actions.FindAction("Move").Disable();
+            pi.actions.FindAction("Aim").Disable();
             stats.damage = 5;
             //Debug.Log("AttackTarget");
-
             //stats.DealDamage(playerStats);
             //Debug.Log(stats.damage);
             //inventoryScript.DecreasePlayerHealth(5);
@@ -179,8 +188,13 @@ public class ZombieContollerGrapple : MonoBehaviour
        // Debug.Log("notGrappled");
         if (inventoryScript.brokeFormGrapple)
         {
+            playerAnim.SetBool("stab", true);
+            playerAnim.SetBool("isGrappled", false);
+            canGrapple = false;
             inventoryScript.brokeFormGrapple = false; 
             anim.SetBool("Grapple", false);
+            yield return new WaitForSeconds(4);
+            canGrapple = true;
         }
         else
         {
@@ -188,7 +202,11 @@ public class ZombieContollerGrapple : MonoBehaviour
             playerStats.isGrappled = false;
             anim.SetBool("Grapple", false);
             playerAnim.SetBool("isGrappled", false);
-            Debug.Log("Here");
+            PlayerInput pi = player.GetComponent<PlayerInput>();
+            pi.actions.FindAction("Sprint").Enable();
+            pi.actions.FindAction("Move").Enable();
+            pi.actions.FindAction("Aim").Enable();
+            //Debug.Log("Here");
             playerAnim.SetTrigger("StabTrig");
             inventoryScript.DecreasePlayerHealth(5);
         }

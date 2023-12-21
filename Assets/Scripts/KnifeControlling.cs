@@ -46,8 +46,8 @@ public class knifeControlling : MonoBehaviour
             bool check = CheckCloseToTag(2);
             if (inventoryScript.leonKniefDurability > 1 && Input.GetKeyDown(KeyCode.E) && check)
             {
-                anim.SetBool("stab", true);
-                anim.SetBool("isGrappled", false);
+                /*anim.SetBool("stab", true);
+                anim.SetBool("isGrappled", false);*/
                 inventoryScript.brokeFormGrapple = true;
                 inventoryScript.DecreaseKniefDurability(2);
 
