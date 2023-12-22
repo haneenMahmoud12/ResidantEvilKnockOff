@@ -14110,6 +14110,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827306824}
   m_CullTransparentMesh: 1
+--- !u!82 &842899589 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 884964490325278592, guid: ef45c44b51a5af14ea01bed9caaa21bd, type: 3}
+  m_PrefabInstance: {fileID: 252372882}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &858528229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20862,7 +20867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.425
+      value: 1.575
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21088,7 +21093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.691599
+      value: 20.607359
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21140,7 +21145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070925442191277752, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: CameraSide
-      value: 0.59
+      value: 0.564
       objectReference: {fileID: 0}
     - target: {fileID: 2070925442191277752, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: CameraDistance
@@ -30914,7 +30919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.425
+      value: 1.575
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30970,7 +30975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070925442191277752, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: ShoulderOffset.y
-      value: 0.05
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34776,7 +34781,7 @@ PrefabInstance:
       objectReference: {fileID: 1373194385}
     - target: {fileID: 3130947835138455297, guid: 1f3c4bf15ac5a7e4a9596704780356e1, type: 3}
       propertyPath: aimColliderLayerMask.m_Bits
-      value: 55
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3147212430992913379, guid: 1f3c4bf15ac5a7e4a9596704780356e1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35478,6 +35483,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.128
       objectReference: {fileID: 0}
+    - target: {fileID: 7284176464573444211, guid: 1f3c4bf15ac5a7e4a9596704780356e1, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 842899589}
     - target: {fileID: 7284176464573444211, guid: 1f3c4bf15ac5a7e4a9596704780356e1, type: 3}
       propertyPath: Handgrenade
       value: 

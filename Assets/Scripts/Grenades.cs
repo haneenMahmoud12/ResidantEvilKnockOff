@@ -21,13 +21,13 @@ public class Grenades : MonoBehaviour
     public Animator anim;
     public bool throwingGrenade = false;
     public InventoryScript inventoryScript;
+    public AudioSource explosion;
     private void Update()
     {
 
         if (Input.GetKeyDown(KeyCode.G))
         {
             StartCoroutine(GrenadeAnim());
-
         }
     }
 
@@ -71,7 +71,7 @@ public class Grenades : MonoBehaviour
             ThrowGrenade();
             anim.SetBool("isThrowing", false);
             yield return new WaitForSeconds(1f);
-
+            explosion.Play();
 
         }
         else
