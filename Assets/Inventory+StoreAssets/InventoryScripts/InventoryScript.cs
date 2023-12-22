@@ -380,7 +380,7 @@ public class InventoryScript : MonoBehaviour
         int index = selectedItem == "Button1" ? 1 : (selectedItem == "Button2" ? 2 : (selectedItem == "Button3" ? 3 : (selectedItem == "Button4" ? 4 :
            (selectedItem == "Button5" ? 5 : 6))));
 
-        Debug.Log(inventory);
+        //Debug.Log(inventory);
         indexCombinee = index - 1;
         GameObject item = inventory[index - 1];
         string combinee = item.GetComponent<InventoryCardScript>().cardName.text;
@@ -406,7 +406,7 @@ public class InventoryScript : MonoBehaviour
         foreach (GameObject inventoryItem in craftingScript.inventory)
         {
             InventoryCardScript script = inventoryItem.GetComponent<InventoryCardScript>();
-            Debug.Log(script);
+            //Debug.Log(script);
             if (i == index - 1)
             {
                 inventoryItem.SetActive(false);
@@ -500,7 +500,7 @@ public class InventoryScript : MonoBehaviour
     {               
         if (script.card != null)
         {
-            Debug.Log(script.cardName.text);
+            //Debug.Log(script.cardName.text);
            
 
             if (script.cardName.text == "Green Herb" ||

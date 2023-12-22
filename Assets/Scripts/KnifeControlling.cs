@@ -33,7 +33,7 @@ public class knifeControlling : MonoBehaviour
                 //stab knocked down enemy
                 inventoryScript.DecreaseKniefDurability(1);
                 //durability -= 1;
-                Debug.Log("knockeddown");
+                //Debug.Log("knockeddown");
 
                 StartCoroutine(stabKnockedDownEnemy());
                 //deplete all enemy's health
