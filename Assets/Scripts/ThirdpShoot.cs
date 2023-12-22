@@ -33,6 +33,7 @@ public class ThirdpShoot : MonoBehaviour
     private Animator animator;
     public InventoryScript inventoryScript;
     public Grenades grenadesScript;
+    public AudioSource OpenDoor;
 
     private void Awake()
     {
@@ -56,14 +57,14 @@ public class ThirdpShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(inventoryScript.leonEquippedWeapon != "" && inventoryScript.leonEquippedGrenade == "" )
-        {
-            animator.SetLayerWeight(1, 1f);
-        }
-        else
-        {
-            animator.SetLayerWeight(1, 0f);
-        }
+        //if(inventoryScript.leonEquippedWeapon != "" && inventoryScript.leonEquippedGrenade == "" )
+        //{
+        //    animator.SetLayerWeight(1, 1f);
+        //}
+        //else
+        //{
+        //    animator.SetLayerWeight(1, 0f);
+        //}
        
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -139,7 +140,7 @@ public class ThirdpShoot : MonoBehaviour
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
         Transform hitTransform = null;
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999999f, aimColliderLayerMask))
         {
             // debugTransform.position = raycastHit.point;
             mouseWorldPosition = raycastHit.point;
@@ -248,6 +249,7 @@ public class ThirdpShoot : MonoBehaviour
         {
             Animator dooranim = other.GetComponent<Animator>();
             dooranim.SetBool("unlock", true);
+            OpenDoor.Play();
         }
         if (other.CompareTag("DoorDiamond") && Input.GetKey(KeyCode.E))
         {
@@ -255,6 +257,7 @@ public class ThirdpShoot : MonoBehaviour
             {
                 Animator dooranim = other.GetComponent<Animator>();
                 dooranim.SetBool("unlock", true);
+                OpenDoor.Play();
             }
             else
             {
@@ -268,6 +271,7 @@ public class ThirdpShoot : MonoBehaviour
             {
                 Animator dooranim = other.GetComponent<Animator>();
                 dooranim.SetBool("unlock", true);
+                OpenDoor.Play();
             }
             else
             {
@@ -283,6 +287,7 @@ public class ThirdpShoot : MonoBehaviour
             {
                 Animator dooranim = other.GetComponent<Animator>();
                 dooranim.SetBool("unlock", true);
+                OpenDoor.Play();
             }
             else
             {
@@ -298,6 +303,7 @@ public class ThirdpShoot : MonoBehaviour
             {
                 Animator dooranim = other.GetComponent<Animator>();
                 dooranim.SetBool("unlock", true);
+                OpenDoor.Play();
                 Debug.Log("Congrats u escaped the zombies");
             }
             else

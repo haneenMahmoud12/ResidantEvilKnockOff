@@ -16,13 +16,15 @@ public class ZombieContollerPetroling : MonoBehaviour
     int i=0;
     public InventoryScript inventoryScript;
     public AudioSource zombieIsPetroling;
+    public Animator playerAnim;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         stats = GetComponent<EnemyStats>();
-        
-      //  GameObject gameObject = GetComponent<GameObject>();
+        //playerAnim = GetComponent<Animator>();
+
+        //  GameObject gameObject = GetComponent<GameObject>();
     }
     void Update()
     {
@@ -170,6 +172,7 @@ public class ZombieContollerPetroling : MonoBehaviour
         {
             RotateToTarget();
             anim.SetTrigger("Attack");
+            playerAnim.SetTrigger("hitReaction");
             stats.damage = 2;
             if (!playerStats.isGrappled)
                 StartCoroutine(DelayDamage());

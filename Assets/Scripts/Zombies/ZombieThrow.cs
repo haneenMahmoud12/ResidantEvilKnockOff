@@ -19,13 +19,14 @@ public class ZombieThrow : MonoBehaviour
     public Transform launchPoint;
     public GameObject bladePrefab;
     public InventoryScript inventoryScript;
+    public Animator playerAnim;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         stats = GetComponent<EnemyStats>();
-        
+        //playerAnim = GetComponent<Animator>();
     }
     void Update()
     {
@@ -160,7 +161,8 @@ public class ZombieThrow : MonoBehaviour
         Vector3 forceToAdd = agent.transform.forward * throwForce + transform.up * throwUpwardForce;
 
         rb.AddForce(forceToAdd,ForceMode.Impulse);
-        
+        playerAnim.SetTrigger("hitReaction");
+
     }
     private IEnumerator DelayDamage()
     {

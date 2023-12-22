@@ -13,11 +13,13 @@ public class ZombieContollerSwing : MonoBehaviour
     private bool playerNear = false;
     [SerializeField] Transform target;
     public InventoryScript inventoryScript;
+    public Animator playerAnim;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         stats = GetComponent<EnemyStats>();
+        //playerAnim = GetComponent<Animator>();
         stats.damage = 2;
     }
     void Update()
@@ -157,6 +159,7 @@ public class ZombieContollerSwing : MonoBehaviour
         {
             RotateToTarget();
             anim.SetTrigger("Attack");
+            playerAnim.SetTrigger("hitReaction");
             stats.damage = 2;
             if (!playerStats.isGrappled)
                 StartCoroutine(DelayDamage());

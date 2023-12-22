@@ -143,7 +143,7 @@ public class InventoryScript : MonoBehaviour
                     case "Rifle": script.card = rifle; break;
                     case "Shotgun": script.card = shotGun; break;
                     case "Emblem": script.card = emblem; break;
-                    case "Spade Key ": script.card = spadeCard; break;
+                    case "Spade Key": script.card = spadeCard; break;
                     case "Heart Key":
                         script.card = heartKey;
                         break;

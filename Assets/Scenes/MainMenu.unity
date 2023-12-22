@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -821,11 +821,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Asset Credit
-
-
-
-'
+  m_text: "Environment : https://assetstore.unity.com/packages/3d/environments/urban/abandoned-asylum-49137\r\nThird
+    person controller : https://assetstore.unity.com/packages/essentials/starter-assets-thirdperson-updates-in-new-charactercontroller-pa-196526\r\nLeon,
+    Zombies, and Store owner : https://www.mixamo.com/#/\r\nAll animations : https://www.mixamo.com/#/\r\nExplosion
+    effects : https://assetstore.unity.com/packages/vfx/particles/particle-pack-127325\r\nKeys
+    models : https://sketchfab.com/3d-models/resident-evil-2-room-keys-21e3c6d5975c49178d974cbb27634633\r\nHand
+    grenade, flahs grenade, knife, pistol, rifle, revolver, shotgun, and their ammos,
+    green herb, red herb, red+red mixture, \r\nred+green mixture, green+green mixture,
+    normal gunpowder, high-grade gunpowder, ruby, emerald, gold bar, emblem, and
+    keycard: https://sketchfab.com/\r\nFrame canvas, and button canvas : https://www.freepik.com/free-photos-vectors/game-frame\r\nMusic,
+    and sound effects : https://freesound.org/, https://www.soundsnap.com/"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
@@ -852,8 +857,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -888,7 +893,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -284.5431, y: 47.638336, z: -246.90642, w: -250.74808}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1275,6 +1280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 547986570}
   - component: {fileID: 547986571}
+  - component: {fileID: 547986572}
   m_Layer: 5
   m_Name: 'EffectSlidder '
   m_TagString: Untagged
@@ -1356,6 +1362,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &547986572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547986569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92d1eaa6bf2436488d8e036aaa371ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effects: {fileID: 24100000, guid: 4c79cbc5d305b134bbc9426289435d39, type: 2}
+  effectsSlider: {fileID: 547986571}
 --- !u!1 &637207425
 GameObject:
   m_ObjectHideFlags: 0
