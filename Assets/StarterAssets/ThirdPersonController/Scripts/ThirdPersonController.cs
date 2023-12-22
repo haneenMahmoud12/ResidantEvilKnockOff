@@ -475,7 +475,7 @@ namespace StarterAssets
             _animator.SetBool("Pick", false);
 
         }
-        private void DelayedActionForGold(Collider other)
+        private void DelayedActionForGold()
         {
             _animator.SetBool("Pick", false);
 
