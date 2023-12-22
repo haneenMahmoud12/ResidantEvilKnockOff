@@ -13,7 +13,6 @@ public class ZombieContollerSwing : MonoBehaviour
     private bool playerNear = false;
     [SerializeField] Transform target;
     public InventoryScript inventoryScript;
-    public AudioSource zombieIsRunning;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -25,11 +24,7 @@ public class ZombieContollerSwing : MonoBehaviour
     {
         //Debug.Log(playerNear);
         if (playerNear)
-        {
-            zombieIsRunning.Play();
-            //stats.ZombieRunning();
             MoveToTarget();
-        }
         if (gameObject.CompareTag("DayLightRoomZombie"))
         {
             if ((target.position.x < 16) || (target.position.x > 28) || (target.position.z > -15) || (target.position.z < -30))
@@ -116,7 +111,7 @@ public class ZombieContollerSwing : MonoBehaviour
     private void MoveToTarget()
     {
         agent.SetDestination(target.position);
-        //stats.ZombieRunning();
+        stats.ZombieRunning();
         anim.SetBool("playerNear", true);
         anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
         //RotateToTarget();
