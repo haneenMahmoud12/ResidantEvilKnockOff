@@ -24,7 +24,7 @@ public class ThirdpShoot : MonoBehaviour
     public GameObject knife;
 
     public Gun weapon;
-    public ParticleSystem hiteffect;
+    //public ParticleSystem hiteffect;
 
     //private Inventory inventory;
     //private EquipmentManager manager;
@@ -56,6 +56,15 @@ public class ThirdpShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(inventoryScript.leonEquippedWeapon != "" && inventoryScript.leonEquippedGrenade == "" )
+        {
+            animator.SetLayerWeight(1, 1f);
+        }
+        else
+        {
+            animator.SetLayerWeight(1, 0f);
+        }
+       
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             inventoryScript.OpenInventory();
@@ -140,7 +149,7 @@ public class ThirdpShoot : MonoBehaviour
 
 
         //Aim
-        if (starterAssetsInputs.aim && inventoryScript.leonEquippedWeapon != "" && inventoryScript.leonEquippedGrenade == "")
+        if (starterAssetsInputs.aim && inventoryScript.leonEquippedWeapon != "" && inventoryScript.leonEquippedGrenade == "" &&!animator.GetBool("isGrappled"))
         {
             Vector3 worldAimTarget = mouseWorldPosition;
             worldAimTarget.y = transform.position.y;
@@ -160,7 +169,7 @@ public class ThirdpShoot : MonoBehaviour
 
             //Shoot
             //removed-> starterAssetsInputs.shoot
-            if (Input.GetKeyDown(KeyCode.Mouse0) && !weapon.gunData.Automatic && inventoryScript.leonEquippedGrenade == "")
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !weapon.gunData.Automatic && inventoryScript.leonEquippedGrenade == "" )
             {
 
                 weapon.Shoot();

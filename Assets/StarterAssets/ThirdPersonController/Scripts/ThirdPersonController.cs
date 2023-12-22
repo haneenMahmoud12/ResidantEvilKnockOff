@@ -428,7 +428,7 @@ namespace StarterAssets
                 _animator.SetBool("Pick", true);
                 int goldAmount = gold.goldAmount;
                 inventoryScript.collectGold(goldAmount);
-                Debug.Log("thirdPersonController " + gold.goldAmount);
+                //Debug.Log("thirdPersonController " + gold.goldAmount);
                 other.gameObject.SetActive(false);
                 Invoke("DelayedActionForGold", 0.7f);
             }
@@ -475,7 +475,7 @@ namespace StarterAssets
             _animator.SetBool("Pick", false);
 
         }
-        private void DelayedActionForGold(Collider other)
+        private void DelayedActionForGold()
         {
             _animator.SetBool("Pick", false);
 

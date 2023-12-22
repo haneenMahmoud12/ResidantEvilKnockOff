@@ -71,6 +71,7 @@ public class Gun : MonoBehaviour
 
         if (CanShoot())
         {
+            t.text = inventoryScript.GetAmmoCount();
             if (inventoryScript.FireWeapon())
             {
                 t.text = inventoryScript.GetAmmoCount();
@@ -135,6 +136,7 @@ public class Gun : MonoBehaviour
 
         if (CanShoot())
         {
+            t.text = inventoryScript.GetAmmoCount();
             if (inventoryScript.FireWeapon())
             {
                 muzleFlash.Emit(1);
